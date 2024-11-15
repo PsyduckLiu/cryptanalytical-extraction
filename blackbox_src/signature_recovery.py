@@ -8,10 +8,13 @@ from io import StringIO
 import jax
 import jax.numpy as jnp
 import networkx as nx
+from tqdm import tqdm
 from .global_vars import GlobalConfig,MIN_SAME_SIZE,BLOCK_MULTIPLY_FACTOR, DEAD_NEURON_THRESHOLD
 from .utils import get_query_counts, get_hidden_layers, get_hidden_at, forward,forward_at, get_polytope_at, matmul, get_second_grad_unsigned,basis, AcceptableFailure, GatherMoreData
+from .utils import on_which_hidden_layer
 from .critical_point_search import sweep_for_critical_points,do_better_sweep, getAllWeightsAndBiases
 from .precision_improvement import improve_layer_precision
+
 # ==========
 #  Functions for Signature Recovery
 # ==========
@@ -523,6 +526,7 @@ def follow_hyperplane(LAYER, start_point, A,B, known_A, known_B, model, dimInput
             print(neuron_negative_count)
 
             print("Neuron consistency: ",neuron_consistency)
+            # breakpoint()
             # Choose the smallest value, which is the most consistent
             which_to_change = np.argmin(neuron_consistency)
             
@@ -575,7 +579,8 @@ def follow_hyperplane(LAYER, start_point, A,B, known_A, known_B, model, dimInput
 
         choices = []
         print("Figure out what direction makes this biggest/smallest")
-        for _ in range(1000):
+        for _ in tqdm(range(1000)):
+        # for _ in range(1000):
             random_dir = np.random.normal(size=dimInput)
             perp_component = np.dot(random_dir,new_perp_dir)/(np.dot(new_perp_dir, new_perp_dir)) * new_perp_dir
             parallel_dir = random_dir - perp_component
@@ -622,6 +627,7 @@ def follow_hyperplane(LAYER, start_point, A,B, known_A, known_B, model, dimInput
                 neuron_positive_count[mask] -= 1
 
         return relevant_points_on_plane
+    
     ###################################################
     ### Actual code to do the sign recovery starts. ###
     ###################################################
@@ -659,12 +665,14 @@ def follow_hyperplane(LAYER, start_point, A,B, known_A, known_B, model, dimInput
         neuron_negative_count = np.sum(neuron_values<-1,axis=0)
         print("Positive count:", neuron_positive_count)
         print("Negative count:", neuron_negative_count)
+
         if target_neuron!=None:
             print("Target neuron: ",target_neuron)
             target_neuron_count = min(neuron_positive_count[target_neuron],neuron_negative_count[target_neuron])
             if len(points_on_plane)==0:
                 init_target_neuron_count = target_neuron_count
             print("Target neuron count: ",target_neuron_count,init_target_neuron_count)
+        # breakpoint()
 
         if ((np.all(neuron_positive_count > 0) and np.all(neuron_negative_count > 0)) or \
             (only_need_positive and np.all(neuron_positive_count > 0))) and \
@@ -679,6 +687,7 @@ def follow_hyperplane(LAYER, start_point, A,B, known_A, known_B, model, dimInput
             neuron_negative_count = np.sum(neuron_values<-1,axis=0)
             print("Neuron positive count: ",neuron_positive_count)
             print("Neuron negative count: ",neuron_negative_count)
+
             if not GlobalConfig.set_Carlini:
                 relevant_points_on_plane = check_relevant_crits(points_on_plane,neuron_values,neuron_positive_count)
                 return relevant_points_on_plane, True
@@ -689,12 +698,14 @@ def follow_hyperplane(LAYER, start_point, A,B, known_A, known_B, model, dimInput
         # direction using the ratios function. Then find a parallel direction.
         
         try:
+            # This part takes a long time.
             #perp_dir = get_ratios([start_point], [range(DIM)], eps=1e-4)[0].flatten()
-            perp_dir = get_ratios_lstsq(model, [start_point], A=[],B=[], eps=1e-5)[0].flatten()
+            perp_dir = get_ratios_lstsq(model, [start_point], A=[],B=[], eps=1e-4)[0].flatten()
         except AcceptableFailure:
             print("Failed to compute ratio at start point. Something very bad happened.")
             return points_on_plane, False
-
+        
+        # breakpoint()
         # Record these points.
         history.append((which_polytope,
                         hidden_vector,
@@ -709,6 +720,7 @@ def follow_hyperplane(LAYER, start_point, A,B, known_A, known_B, model, dimInput
         # This is the point at which the first and second layers intersect.
         try:
             start_point, multiple_intersection_point, new_change_axis = choose_new_direction_from_minimize(current_change_axis)
+            # breakpoint()
         except AcceptableFailure:
             return points_on_plane, False
         if new_change_axis != current_change_axis:
@@ -722,7 +734,8 @@ def follow_hyperplane(LAYER, start_point, A,B, known_A, known_B, model, dimInput
         step_distance = np.sum(towards_multiple_direction**2)**.5
 
         print("Distance we need to step:", step_distance)        
-        
+        # breakpoint()
+
         if step_distance > 1 or True:
             mid_point = 1e-4 * towards_multiple_direction/np.sum(towards_multiple_direction**2)**.5 + start_point
             
@@ -847,10 +860,10 @@ def get_more_crit_pts(A,B, known_A0, known_B0, critical_points, LAYER, model, di
     get_critical_point = get_critical_points()
 
 
-    print("Start looking for critical point")
+    print("Start looking for existing critical point")
     MAX_POINTS = 200
     which_point = next(get_critical_point)
-    print("Done looking for critical point")
+    print("Done looking for existing critical point")
 
     initial_points = []
     history = []
@@ -864,6 +877,10 @@ def get_more_crit_pts(A,B, known_A0, known_B0, critical_points, LAYER, model, di
             history.append((which_polytope,
                             hidden_vector,
                             np.copy(point)))
+    print("Length of Initial points", len(initial_points))
+    print("Length of history", len(history))
+    print("Length of critical points", len(pts))
+    # breakpoint()
 
     while True:
         if not already_checked_critical_points:
@@ -875,8 +892,11 @@ def get_more_crit_pts(A,B, known_A0, known_B0, critical_points, LAYER, model, di
         while len(pts) > prev_count+2:
             print("======"*10)
             print("RESTART SEARCH", len(pts), prev_count)
-            #print(which_point)
+            # print(which_point[0])
+            # breakpoint()
             prev_count = len(pts)
+
+            # This part takes a long time.
             more_points, done = follow_hyperplane(LAYER, which_point,
                                         A,B,
                                         known_A0, known_B0, model,dimInput,dimOfPrevLayer,dimOfLayer,special,
@@ -944,8 +964,8 @@ def process_block(ratios, other_ratios):
 
     close = differences < GlobalConfig.BLOCK_ERROR_TOL * jnp.log(ratios.shape[1])
 
-    pairings = jnp.sum(close, axis=2) >= max(MIN_SAME_SIZE,BLOCK_MULTIPLY_FACTOR*(np.log(ratios.shape[1])-2))
-
+    # pairings = jnp.sum(close, axis=2) >= max(MIN_SAME_SIZE,BLOCK_MULTIPLY_FACTOR*(np.log(ratios.shape[1])-2))
+    pairings = jnp.sum(close, axis=2) >= 2
     return pairings
 
 
@@ -975,7 +995,6 @@ def ratio_normalize(possible_matrix_rows):
     errors[np.isnan(errors)] = 1e6
 
     ratio_evidence = medians
-
     # Choose the column with the fewest nans to return
     nancount = np.sum(np.isnan(ratio_evidence), axis=0)
 
@@ -1026,7 +1045,7 @@ def graph_solve(all_ratios, all_criticals, expected_neurons, LAYER, debug=False)
     print("Go up to", len(criticals_group))
     all_pairings = [[] for _ in range(sum(map(len,ratios_group)))]
     for batch_index,(criticals,ratios) in enumerate(zip(criticals_group, ratios_group)):
-        print(batch_index)
+        print("batch_index:", batch_index)
 
         # Compute the all-pairs similarity
         axis = list(range(all_ratios.shape[1]))
@@ -1044,7 +1063,8 @@ def graph_solve(all_ratios, all_criticals, expected_neurons, LAYER, debug=False)
             # And now create the graph matching ratios that are similar
             for this_batch_i,global_j in zip(*np.nonzero(np.array(batch_pairings))):
                 all_pairings[this_batch_i + batch_offset].append(global_j)
-    #print("All pairings: ",all_pairings)
+    # print("All pairings: ",all_pairings)
+
     graph = nx.Graph()
     # Add the edges to the graph, removing self-loops
     graph.add_edges_from([(i,j) for i,js in enumerate(all_pairings) for j in js if abs(i-j) > 1]) 
@@ -1052,7 +1072,6 @@ def graph_solve(all_ratios, all_criticals, expected_neurons, LAYER, debug=False)
 
     sorted_components = sorted(components, key=lambda x: -len(x))
     print("Sorted components: ",sorted_components)
-            
 
     if len(components) == 0:
         print("No components found")
@@ -1062,21 +1081,23 @@ def graph_solve(all_ratios, all_criticals, expected_neurons, LAYER, debug=False)
     previous_num_components = np.inf
     
     while previous_num_components > len(sorted_components):
+        print("Previous number of components", previous_num_components)
+
         previous_num_components = len(sorted_components)
         candidate_rows = []
         candidate_components = []
 
         datas = [all_ratios[list(component)] for component in sorted_components]
-
         #This part is taking lots of time because of each pool init, would have to make it global but switch it to sequential for now
         #results =mp.Pool(MPROC_THREADS//4).map(ratio_normalize, datas)
         results = list(map(ratio_normalize, datas))
 
         candidate_rows = [x[0] for x in results]
         candidate_components = sorted_components
-
         candidate_rows = np.array(candidate_rows)
-
+        print("candidate_components", candidate_components)
+        print("Candidate rows: \n",candidate_rows)
+        
         new_pairings = [[] for _ in range(len(candidate_rows))]
         
         # Re-do the pairings
@@ -1098,8 +1119,8 @@ def graph_solve(all_ratios, all_criticals, expected_neurons, LAYER, debug=False)
         sorted_components = sorted(components, key=lambda x: -len(x))
 
         print("After re-doing the graph, the component counts is", len(components), "with items", list(map(len,sorted_components)))
+    
     print("Processing each connected component in turn.")
-    guessed_rows  = []
 
     resulting_examples = []
     resulting_rows = []
@@ -1107,12 +1128,16 @@ def graph_solve(all_ratios, all_criticals, expected_neurons, LAYER, debug=False)
     skips_because_of_nan = 0
     failure = None
 
+    guessed_rows  = []
     irrelevant_indices = []
 
     for c_count, component in enumerate(sorted_components):
+        print("On component", c_count, "with indexs", component)
+
         possible_matrix_rows = all_ratios[list(component)]
         guessed_row, normalize_axis, normalize_error = ratio_normalize(possible_matrix_rows)
         guessed_rows.append([guessed_row, normalize_axis, normalize_error])
+
     if not GlobalConfig.set_Carlini:
         #def custom_sort(x): # Different way of sorting the clusters by number of nans instead of number of components in a cluster
         #    num_nans = np.isnan(x[1][0]).sum()
@@ -1120,29 +1145,37 @@ def graph_solve(all_ratios, all_criticals, expected_neurons, LAYER, debug=False)
         #    # Adjust NaN count to give a slight advantage to components longer than 2
         #    adjusted_nan_count = num_nans - (component_length >= 3)
         #    return (adjusted_nan_count, -component_length)
+
         def custom_sort(x): #We sort by number of components in a cluster except for clusters where full signature is recovered. They are prioritized. This prevents and infinite loop that we previously had in Carlini's implementation.
             num_nans = np.isnan(x[1][0]).sum()
             component_length = len(x[0])
             if num_nans==0:
                 component_length=np.inf
             return (-component_length, num_nans)
+        
         paired_components = list(zip(sorted_components, guessed_rows))
         sorted_paired_components = sorted(paired_components, key=custom_sort)
         sorted_components = [comp for comp, _ in sorted_paired_components]
         guessed_rows = [guessed for _, guessed in sorted_paired_components]
+
     for c_count, component in enumerate(sorted_components):
         if debug:
             print("\n")
             if c_count >= expected_neurons:
                 print("WARNING: This one might be a duplicate!")
-        print("-----")
+        print("-----"*5)
         print("On component", c_count, "with indexs", component)
         guessed_row, normalize_axis, normalize_error = guessed_rows[c_count]
-        print('The guessed error in the computation is',normalize_error, 'with', len(component), 'witnesses')
+        
         if normalize_error > .01 and len(component) <= 5:
-            print("Component size less than 5 with high error; this isn't enough to be sure")
+            print("Component size less than 5 and with high error; this isn't enough to be sure")
             continue
+        
+        print("Guessed row: ",guessed_row)
+        print('The guessed error in the computation is',normalize_error, 'with', len(component), 'witnesses')
         print("Normalize on axis", normalize_axis)
+
+        # check whether the guessed row is already in the set
         if len(resulting_rows):
             scaled_resulting_rows = np.array(resulting_rows)
             scaled_resulting_rows /= scaled_resulting_rows[:,normalize_axis:normalize_axis+1]
@@ -1155,11 +1188,11 @@ def graph_solve(all_ratios, all_criticals, expected_neurons, LAYER, debug=False)
                 print("Likely have found this node before")
                 print("Should error be raised????")
                 continue
-        print("Guessed row: ",guessed_row)
 
         # If there is a nan value in a row, i.e., no full signature recovery for a neuron
         if np.any(np.isnan(guessed_row)) and c_count < expected_neurons: 
             print("Got NaN, need more data",len(component)/sum(map(len,components)),1/expected_neurons)
+    
             if len(component) >= 3:
                 # If less components than layer size (expected neurons) and more than 2 critical points for the concerned neuron
                 if c_count < expected_neurons:
@@ -1210,6 +1243,7 @@ def graph_solve(all_ratios, all_criticals, expected_neurons, LAYER, debug=False)
             else:
                 irrelevant_indices=[]       
         guessed_row[np.isnan(guessed_row)] = 0
+        print("Guessed row converting nan to 0: ",guessed_row)
 
         # Only for components which are bigger than 3 and which don't have np.isnan in guessed row and which are under expected_neurons count, we add them to resulting_rows => all neurons with full signature recovered
         if c_count < expected_neurons and len(component) >= 3:
@@ -1217,9 +1251,12 @@ def graph_solve(all_ratios, all_criticals, expected_neurons, LAYER, debug=False)
             resulting_examples.append([all_criticals[x] for x in component])
         else:
             print("Don't add it to the set")
+    
+
     # We set failure when something went wrong but we want to defer crashing
     # (so that we can use the partial solution)
     gc.collect()
+    print("-----"*5)
     print("All irrelevant indices: ",irrelevant_indices)
     print("len(all_ratios): ",len(all_ratios))
     print("len(resulting_rows): ",len(resulting_rows))
@@ -1229,10 +1266,11 @@ def graph_solve(all_ratios, all_criticals, expected_neurons, LAYER, debug=False)
         print("We have not explored all neurons. Do more random search", len(resulting_rows), skips_because_of_nan, expected_neurons)
         raise AcceptableFailure(irr_idx=irrelevant_indices,partial_solution=(np.array(resulting_rows), resulting_examples))
     elif len(resulting_rows)!=0:
-        print("At this point, we just assume the neuron must be dead")
+        print("At this point, we just assume the remaining neurons must be dead")
         while len(resulting_rows) < expected_neurons: 
             resulting_rows.append(np.zeros_like((resulting_rows[0])))
             resulting_examples.append([np.zeros_like(resulting_examples[0][0])])
+        print(resulting_rows)
 
     # Here we know it's a GatherMoreData failure, but we want to only do this
     # if all neurons have been found up to DeadNeuronThreshold and we have at least 3 critical points for the target neuron
@@ -1331,6 +1369,7 @@ def get_ratios_lstsq(model, critical_points, A, B, debug=False, eps=1e-5):
     This means we can't directly choose orthogonal directions, and so we're going
     to just pick random ones and then use least-squares to do it
     """
+    print("Start get_ratios_lstsq")
     weights,biases = getAllWeightsAndBiases(model)
     ratios = []
     for i,point in enumerate(critical_points):
@@ -1400,7 +1439,8 @@ def get_ratios_lstsq(model, critical_points, A, B, debug=False, eps=1e-5):
         soln[column_is_zero] = np.nan
 
         ratios.append(soln)
-        
+    
+    print("End get_ratios_lstsq")
     return ratios
 def gather_ratios(critical_points, A ,B ,check_fn, LAYER, COUNT, model,dimInput,dimOfPrevLayer,dimOfLayer, special, eps=1e-6):
     """
@@ -1408,7 +1448,9 @@ def gather_ratios(critical_points, A ,B ,check_fn, LAYER, COUNT, model,dimInput,
     """
     this_layer_critical_points = []
     print("Gathering", COUNT, "critical points")
+
     for point in critical_points:
+        print("Trying to get ratios for point", point[0])
         if LAYER > 0:
             #Check if the output of any hidden layer before relu is less than tolerance, if yes we move on
             #i.e., the output is very small, this means further computations might fail due to limitation in precision?
@@ -1444,6 +1486,7 @@ def gather_ratios(critical_points, A ,B ,check_fn, LAYER, COUNT, model,dimInput,
             break
     gc.collect()
     return this_layer_critical_points
+
 def compute_layer_values(critical_points,model, weights,biases,layerId,dimInput,dimOfPrevLayer,dimOfLayer,special):
     """
     Main function of Signature Recovery that puts everything together.
@@ -1512,8 +1555,15 @@ def compute_layer_values(critical_points,model, weights,biases,layerId,dimInput,
         
         this_layer_critical_points = filtered_points
 
+        for i, point in enumerate(this_layer_critical_points):
+            layer_id, neuron_id = on_which_hidden_layer(point[1], model)
+            if layer_id == -1:
+                print("CP ", i, "is not a real critical point")
+            else:
+                print("CP ", i, "is a critical point of layer", layer_id+1, "Neuron", neuron_id+1)
+                # print("CP ", i, "Ratio is", point[0])
+
         print("After filtering duplicates we're down to ", len(this_layer_critical_points), "critical points")
-        
 
         print("Start trying to do the graph solving")
         try:
@@ -1526,6 +1576,10 @@ def compute_layer_values(critical_points,model, weights,biases,layerId,dimInput,
         except GatherMoreData as e:
             print("Graph solving failed because we didn't explore all sides of at least one neuron")
             print("Fall back to the hyperplane following algorithm in order to get more data")
+            print("nan index (e.data[0]): ",e.data[0])
+            print("length of ctitical points (e.data[1]0: ",len(e.data[1]))
+            print("All irrelevant indices (e.data[2]): ",e.data[2])
+            # breakpoint()
             irrelevant_indices_set = set(e.data[2])
             this_layer_critical_points = [point for idx, point in enumerate(this_layer_critical_points) if idx not in irrelevant_indices_set]
 
@@ -1537,9 +1591,14 @@ def compute_layer_values(critical_points,model, weights,biases,layerId,dimInput,
                     r = r[1:]
                 print("No more to give!")
 
-            print("LAYER: ",LAYER)
             prev_A,prev_B = A[:-1],B[:-1]
-            print("e.data[0]: ",e.data[0])
+            print("Length of weights", len(weights))
+            print("Length of biases", len(biases))
+            print("Length of A", len(A))    
+            print("Length of B", len(B))
+            print("Length of prev_A", len(prev_A))
+            print("Length of prev_B", len(prev_B))
+            print(A[-1].shape)
             more_critical_points = get_more_crit_pts(prev_A, prev_B, A[-1], B[-1], mine(e.data[1]),
                                                                      LAYER-1, model, dimInput, dimOfPrevLayer, dimOfLayer, special, already_checked_critical_points=True,
                                                                      only_need_positive=True, target_neuron=e.data[0])
@@ -1552,13 +1611,19 @@ def compute_layer_values(critical_points,model, weights,biases,layerId,dimInput,
             
             COUNT = dimOfLayer
         except AcceptableFailure as e:
+            print("*********************************")
+            print("Graph solving failed; get more points")
+            print("AcceptableFailure")
+            print("e.irr_idx", e.irr_idx)
+            print("e.partial_solution", e.partial_solution)
+            print("*********************************")
+            # breakpoint()
+            
             irrelevant_indices_set = set(e.irr_idx)
             this_layer_critical_points = [point for idx, point in enumerate(this_layer_critical_points) if idx not in irrelevant_indices_set]
 
-            print("Graph solving failed; get more points")
             COUNT = dimOfLayer
             if 'partial_solution' in dir(e):
-
                 if len(e.partial_solution[0]) > 0:
                     partial_weights, corresponding_examples = e.partial_solution
                     print("Got partial solution with shape", partial_weights.shape)
@@ -1573,7 +1638,7 @@ def compute_layer_values(critical_points,model, weights,biases,layerId,dimInput,
                     partial_biases = np.array(partial_biases)
 
     print("Number of critical points per cluster", [len(x) for x in critical_groups])
-    
+
     point_per_class = [x[0] for x in critical_groups]
 
     extracted_normals = np.array(extracted_normals).T

@@ -440,7 +440,6 @@ if __name__=='__main__':
     filename_md  = savePath + 'df.md'
     ensure_dir(filename_md)
     logger.info(f"Signature and Sign recovery results will be saved to \n\t {filename_md}")
-    
 
     # ---------------------------------------------------
     # Recover signatures (model or extraction)
@@ -462,6 +461,8 @@ if __name__=='__main__':
         # and then weights, biases = getWhiteboxSignatures(extracted_model, args.layerID)
         #
         weights,biases = getWhiteboxSignatures(model, args.layerID)
+        print("Weights and biases extracted from whitebox model.")
+
         # To try out whether signature extraction works when all previous weights are only up to precision of float32
         #for i in range(len(A)):
         #    weights[i] = np.array(weights[i]).astype(np.float32)

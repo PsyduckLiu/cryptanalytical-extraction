@@ -7,7 +7,7 @@ import jax
 
 # Global static variables
 MPROC_THREADS = max(mp.cpu_count(),1)
-BLOCK_MULTIPLY_FACTOR = 2 #8
+BLOCK_MULTIPLY_FACTOR = 2  # 8
 DEAD_NEURON_THRESHOLD = 2500 #500 #Changes for how long we do the generalized critical point search and try search for neurons that are hard to find
 MIN_SAME_SIZE = 4 #6
 

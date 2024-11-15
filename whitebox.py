@@ -421,5 +421,3 @@ def alignment(model):
     A2[1] *= np.sign(A1[1][0])
     print("A1: ",A1)
     print("A2: ",A2)
-
-

@@ -51,7 +51,7 @@ def make_new_mnist_model(hidden_size, layer_number):
     model.summary()
 
     # Saving model path modified for MNIST
-    model_save_path = f"deti/models/mnist784_{hidden_size}x{layer_number}_1v2.keras"
+    model_save_path = f"models/mnist784_{hidden_size}x{layer_number}_1v2.keras"
     model.save(model_save_path)
     for l in model.layers:
         if len(l.get_weights()) > 0:
@@ -60,7 +60,7 @@ def make_new_mnist_model(hidden_size, layer_number):
             print("Bias: ", b)
     return model_save_path
 
-#make_new_mnist_model(32,2)
+make_new_mnist_model(16,2)
 
 def make_new_rescaled_model(model_path,scale):
     model = tf.keras.models.load_model(model_path)

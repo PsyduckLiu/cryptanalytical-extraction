@@ -106,9 +106,9 @@ def do_better_sweep(model, offset=None, direction=None, low=-1e3, high=1e3, data
     
     """
     if len(model.layers) == 3:
-        SKIP_LINEAR_TOL = 1e-7
+        SKIP_LINEAR_TOL = 1e-3
     else:
-        SKIP_LINEAR_TOL = 1e-8
+        SKIP_LINEAR_TOL = 1e-3
     shape = model.input_shape[1:]
 
     if offset is None:

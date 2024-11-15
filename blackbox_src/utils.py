@@ -186,3 +186,19 @@ def softmax(x):
     exp_x = np.exp(x - np.max(x))  # Subtracting np.max(x) for numerical stability
     return exp_x / exp_x.sum()
 
+
+
+
+
+def on_which_hidden_layer(point, model):
+    weights,biases = getAllWeightsAndBiases(model)
+    x = point
+    for i in range(0, len(weights)):
+        x = np.matmul(x, weights[i]) + biases[i]
+        for j in range(len(x)):
+            if abs(x[j]) < 1e-4:
+                return i, j
+        if i < len(weights) - 1:
+            x = x*(x>0)
+        
+    return -1, -1
