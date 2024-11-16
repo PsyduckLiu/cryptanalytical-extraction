@@ -192,11 +192,12 @@ def softmax(x):
 
 def on_which_hidden_layer(point, model):
     weights,biases = getAllWeightsAndBiases(model)
+
     x = point
     for i in range(0, len(weights)):
         x = np.matmul(x, weights[i]) + biases[i]
         for j in range(len(x)):
-            if abs(x[j]) < 1e-4:
+            if abs(x[j]) < 1e-6:
                 return i, j
         if i < len(weights) - 1:
             x = x*(x>0)

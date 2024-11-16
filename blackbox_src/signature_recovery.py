@@ -964,8 +964,8 @@ def process_block(ratios, other_ratios):
 
     close = differences < GlobalConfig.BLOCK_ERROR_TOL * jnp.log(ratios.shape[1])
 
-    # pairings = jnp.sum(close, axis=2) >= max(MIN_SAME_SIZE,BLOCK_MULTIPLY_FACTOR*(np.log(ratios.shape[1])-2))
-    pairings = jnp.sum(close, axis=2) >= 2
+    pairings = jnp.sum(close, axis=2) >= max(MIN_SAME_SIZE,BLOCK_MULTIPLY_FACTOR*(np.log(ratios.shape[1])-2))
+    # pairings = jnp.sum(close, axis=2) >= 2
     return pairings
 
 
@@ -1030,8 +1030,8 @@ def graph_solve(all_ratios, all_criticals, expected_neurons, LAYER, debug=False)
     global fixed_neurons
     print("Length criticals group, all ratios group: ",len(all_ratios),len(all_criticals))
     print("Block multiply factor: ",BLOCK_MULTIPLY_FACTOR)
-    # 1. Load the critical points and ratios we precomputed
 
+    # 1. Load the critical points and ratios we precomputed
     all_ratios = np.array(all_ratios, dtype=np.float64) #float64
     all_ratios_f32 = np.array(all_ratios, dtype=np.float32)#np.float32
     all_criticals = np.array(all_criticals, dtype=np.float64) #float64
@@ -1041,7 +1041,6 @@ def graph_solve(all_ratios, all_criticals, expected_neurons, LAYER, debug=False)
     criticals_group = [all_criticals[i:i+1000] for i in range(0,len(all_criticals),1000)]
                     
     # 2. Compute the similarity pairwise between the ratios we've computed
-
     print("Go up to", len(criticals_group))
     all_pairings = [[] for _ in range(sum(map(len,ratios_group)))]
     for batch_index,(criticals,ratios) in enumerate(zip(criticals_group, ratios_group)):
@@ -1096,7 +1095,7 @@ def graph_solve(all_ratios, all_criticals, expected_neurons, LAYER, debug=False)
         candidate_components = sorted_components
         candidate_rows = np.array(candidate_rows)
         print("candidate_components", candidate_components)
-        print("Candidate rows: \n",candidate_rows)
+        print("Length of candidate rows", len(candidate_rows))
         
         new_pairings = [[] for _ in range(len(candidate_rows))]
         
@@ -1127,6 +1126,7 @@ def graph_solve(all_ratios, all_criticals, expected_neurons, LAYER, debug=False)
     
     skips_because_of_nan = 0
     failure = None
+    failure_reason = None
 
     guessed_rows  = []
     irrelevant_indices = []
@@ -1199,13 +1199,18 @@ def graph_solve(all_ratios, all_criticals, expected_neurons, LAYER, debug=False)
                     print("Component: ",c_count, " triggers GatherMoreData.")
                     nan_indices = np.argwhere(np.isnan(guessed_row)).flatten()
                     failure = (c_count, nan_indices[0],[all_criticals[x] for x in component])
+                    print("Failure (more than 2 CPs, but with nan)")
                 skips_because_of_nan += 1
             elif not GlobalConfig.set_Carlini:
                 # If 2 or less critical points for the concerned neuron
                 # Need to go into AcceptableFailure more random search
+                print("Component: ",c_count, " triggers AcceptableFailure.")
+                print("Failure (2 or less critical points)")
                 failure = 'acceptable'
+                failure_reason = c_count
             continue
         elif not np.any(np.isnan(guessed_row)):
+            print("Fully recovered neuron")
             # Memory deduplication
             if not GlobalConfig.set_Carlini:
                 crits_fst_elements = [all_criticals[x][0] for x in component]
@@ -1243,6 +1248,7 @@ def graph_solve(all_ratios, all_criticals, expected_neurons, LAYER, debug=False)
             else:
                 irrelevant_indices=[]       
         guessed_row[np.isnan(guessed_row)] = 0
+        # But only weight row wothout nan values can run into this branch
         print("Guessed row converting nan to 0: ",guessed_row)
 
         # Only for components which are bigger than 3 and which don't have np.isnan in guessed row and which are under expected_neurons count, we add them to resulting_rows => all neurons with full signature recovered
@@ -1252,7 +1258,7 @@ def graph_solve(all_ratios, all_criticals, expected_neurons, LAYER, debug=False)
         else:
             print("Don't add it to the set")
     
-
+    breakpoint()
     # We set failure when something went wrong but we want to defer crashing
     # (so that we can use the partial solution)
     gc.collect()
@@ -1263,7 +1269,12 @@ def graph_solve(all_ratios, all_criticals, expected_neurons, LAYER, debug=False)
     
     # Here we either initiate more random search or we stop and output results
     if ((len(resulting_rows)+skips_because_of_nan < expected_neurons and len(all_ratios) < DEAD_NEURON_THRESHOLD) or failure=='acceptable'):
-        print("We have not explored all neurons. Do more random search", len(resulting_rows), skips_because_of_nan, expected_neurons)
+        print("We have not explored all neurons. Do more random search")
+        print("Length of resulting_rows", len(resulting_rows))
+        print("The number of skips_because_of_nan", skips_because_of_nan)
+        print("The expected_neurons are", expected_neurons)
+        print("Failure reason: ",failure_reason)
+        breakpoint()
         raise AcceptableFailure(irr_idx=irrelevant_indices,partial_solution=(np.array(resulting_rows), resulting_examples))
     elif len(resulting_rows)!=0:
         print("At this point, we just assume the remaining neurons must be dead")
@@ -1467,7 +1478,7 @@ def gather_ratios(critical_points, A ,B ,check_fn, LAYER, COUNT, model,dimInput,
         if len(model.layers) == 3:
             GRAD_EPS = 1e1
         else:
-            GRAD_EPS = 1e-4#1e-6#1e-4
+            GRAD_EPS = 1e-6#1e-6#1e-4
         for EPS in [GRAD_EPS, GRAD_EPS/10, GRAD_EPS/100]:
             try:
                 normal = get_ratios_lstsq(model, [point], A,B, eps=EPS)[0].flatten()
@@ -1561,7 +1572,7 @@ def compute_layer_values(critical_points,model, weights,biases,layerId,dimInput,
                 print("CP ", i, "is not a real critical point")
             else:
                 print("CP ", i, "is a critical point of layer", layer_id+1, "Neuron", neuron_id+1)
-                # print("CP ", i, "Ratio is", point[0])
+                print("CP ", i, "Ratio is", point[0])
 
         print("After filtering duplicates we're down to ", len(this_layer_critical_points), "critical points")
 
@@ -1579,7 +1590,7 @@ def compute_layer_values(critical_points,model, weights,biases,layerId,dimInput,
             print("nan index (e.data[0]): ",e.data[0])
             print("length of ctitical points (e.data[1]0: ",len(e.data[1]))
             print("All irrelevant indices (e.data[2]): ",e.data[2])
-            # breakpoint()
+            breakpoint()
             irrelevant_indices_set = set(e.data[2])
             this_layer_critical_points = [point for idx, point in enumerate(this_layer_critical_points) if idx not in irrelevant_indices_set]
 
@@ -1615,7 +1626,7 @@ def compute_layer_values(critical_points,model, weights,biases,layerId,dimInput,
             print("Graph solving failed; get more points")
             print("AcceptableFailure")
             print("e.irr_idx", e.irr_idx)
-            print("e.partial_solution", e.partial_solution)
+            print("e.partial_solution", len(e.partial_solution[0]))
             print("*********************************")
             # breakpoint()
             
