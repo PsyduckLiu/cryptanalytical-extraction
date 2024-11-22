@@ -1,0 +1,68 @@
+
+Check the solution of the last weight matrix.
+Neuron 0 maps on to neuron 1 with error 4.211112837886797e-06 ratio -1.1251371925814269
+Bias check [0.01619314]
+Neuron 1 maps on to neuron 7 with error 7.928592438732582e-07 ratio -2.429287834300199
+Bias check [0.00247092]
+Neuron 2 maps on to neuron 2 with error 7.617532119895714e-07 ratio -3.238390381605203
+Bias check [-0.00067597]
+Neuron 3 maps on to neuron 5 with error 1.3990350032589002e-05 ratio -0.09456413223982546
+Bias check [0.00138774]
+Neuron 4 maps on to neuron 4 with error 7.821586784924123e-07 ratio 0.46887289402907467
+Bias check [-0.00201872]
+Neuron 5 maps on to neuron 6 with error 5.048309525887674e-06 ratio 2.5753750325917144
+Bias check [0.00645673]
+Neuron 6 maps on to neuron 0 with error 2.2157131972648018e-05 ratio -0.0705896473212307
+Bias check [-0.00115679]
+Neuron 7 maps on to neuron 3 with error 8.324580373324073e-07 ratio -2.3818492812153558
+Bias check [0.00014511]
+Real:  [array([[-0.05809642, -0.05542603,  0.00887471, ..., -0.07396971,
+        -0.0499173 , -0.00549133],
+       [ 0.08239   , -0.06465169,  0.02450673, ..., -0.0606773 ,
+        -0.02897189,  0.08664994],
+       [ 0.05987743, -0.03536488,  0.02098663, ..., -0.02298196,
+        -0.02790111,  0.00718978],
+       ...,
+       [ 0.08026239, -0.06450508, -0.00097669, ...,  0.03655055,
+        -0.00396643, -0.03406581],
+       [ 0.07107955, -0.00747035,  0.06370231, ..., -0.03794392,
+        -0.05876534, -0.04655837],
+       [-0.02344801,  0.02071258,  0.05509749, ..., -0.08216676,
+         0.03562683,  0.07257767]]), array([-0.02718019,  0.23925532,  1.79120605,  1.10107249, -0.62873312,
+       -0.01811583,  1.08608048, -0.15172682])]
+Corrected:  [[ 0.05809653  0.05542296 -0.00887513 ...  0.07396961 -0.04992023
+   0.00549209]
+ [-0.08238818  0.06464908 -0.02450654 ...  0.06067679 -0.02897116
+  -0.08664998]
+ [-0.05987717  0.03536368 -0.02098647 ...  0.02298224 -0.02790016
+  -0.00718982]
+ ...
+ [-0.08026271  0.06450415  0.00097685 ... -0.03655047 -0.00396476
+   0.03406582]
+ [-0.07108     0.0074714  -0.06370225 ...  0.03794448 -0.05876479
+   0.04655671]
+ [ 0.02344919 -0.0207131  -0.0550976  ...  0.08216676  0.03562878
+  -0.07257695]] [[ 0.02602339]
+ [-0.22306218]
+ [-1.79188202]
+ [-1.10092738]
+ [-0.6267144 ]
+ [ 0.01950357]
+ [ 1.07962375]
+ [ 0.15419774]]
+Original Neuron 0 maps on to recovered neuron 6
+ERROR LAYER EXTRACTED INCORRECTLY
+Original Neuron 1 maps on to recovered neuron 0
+ERROR LAYER EXTRACTED INCORRECTLY
+Original Neuron 2 maps on to recovered neuron 2
+ERROR LAYER EXTRACTED INCORRECTLY
+Original Neuron 3 maps on to recovered neuron 7
+absolute values of weights are close enough
+Original Neuron 4 maps on to recovered neuron 4
+ERROR LAYER EXTRACTED INCORRECTLY
+Original Neuron 5 maps on to recovered neuron 3
+ERROR LAYER EXTRACTED INCORRECTLY
+Original Neuron 6 maps on to recovered neuron 5
+ERROR LAYER EXTRACTED INCORRECTLY
+Original Neuron 7 maps on to recovered neuron 1
+ERROR LAYER EXTRACTED INCORRECTLY

@@ -31,6 +31,9 @@ from blackbox_src.sign_recovery import is_solution, solve_contractive_sign, solv
 from blackbox_src.critical_point_search import sweep_for_critical_points
 from blackbox_src.signature_recovery import recoverCritPts_Signature, check_quality
 
+debug = True
+
+
 # ---------------------------------------------------
 # Set up logging
 # ---------------------------------------------------
@@ -449,6 +452,8 @@ if __name__=='__main__':
     # Set seed !!!! Do not set it if you are not testing
     np.random.seed(args.seed)
     random.seed(args.seed)
+
+
     inputShape = model.input_shape[1:]
     hiddenLayerIDs = [i for i in np.arange(1, len(model.layers)-1)]
     neuronsHiddenLayers = [model.layers[i].output_shape[-1] for i in hiddenLayerIDs]
@@ -461,7 +466,8 @@ if __name__=='__main__':
         # and then weights, biases = getWhiteboxSignatures(extracted_model, args.layerID)
         #
         weights,biases = getWhiteboxSignatures(model, args.layerID)
-        print("Weights and biases extracted from whitebox model.")
+        if debug:
+            print("Weights and biases extracted from whitebox model.")
 
         # To try out whether signature extraction works when all previous weights are only up to precision of float32
         #for i in range(len(A)):
@@ -471,8 +477,13 @@ if __name__=='__main__':
             # To try out how signature extraction in the target layer is influenced when a neuron from previous layer is scaled to near zero or a sign is flipped.
             #weights[0].T[0]*=-1#0.01
             #biases[0][0]*=-1#0.01
+
+
+            startTime = time.time()
             extracted_normal, extracted_bias, critical_groups, avg_tFindCrt_Signature, avg_tSignatureRec, tImprovePrec, avg_query_count, avg_crit_query_count = recoverCritPts_Signature(model, weights, biases, args.layerID, args.quantized, args.setting, dataset=args.dataset)
             nNeurons = len(critical_groups)
+            endTime = time.time()
+            print("Overall Time taken for signature extraction: ",endTime-startTime)
 
             # CHEATING FUNCTION: Report how well we're doing and scale with same constant as original to make comparable
             # Check quality is a cheating function, so it can be removed if we don't want to cheat
@@ -481,8 +492,15 @@ if __name__=='__main__':
             with open(savePath +'quality_check.txt', 'w') as f:
                 f.write(output)
             # Check if real and corrected weights and biases are the same up to sign
+
+            # np.allclose seems to give a wrong judge on biases extraction
+
             weights_same_up_to_sign = np.allclose(np.abs(weights[-1]), np.abs(extracted_normal))
             biases_same_up_to_sign = np.allclose(np.abs(biases[-1]), np.abs(extracted_bias))
+
+
+
+
             # Check if the weights and bias are same up to sign in float32
             print("Weights, biases same up to sign in float32 precision?: ",weights_same_up_to_sign,biases_same_up_to_sign)
             weights_float16 = [np.array(w, dtype=np.float16) for w in weights]
@@ -560,7 +578,7 @@ if __name__=='__main__':
     logger.info(f"Signs will be recovered for neuronIDs: \n\t {args.tgtNeurons}.")
 
 
-
+    '''
     # ---------------------------------------------------
     # Run sign recovery
     # ---------------------------------------------------
@@ -756,29 +774,54 @@ if __name__=='__main__':
         logger.info(f"Average run time: {avg_runtime/nNeurons:.2f}")
         model_name_split = args.model.split('.')
         model_save_path = model_name_split[0]+f"_extracted_CarliniSign{quant_level}."+model_name_split[1]
+    '''
+    
+    extracted_signs = np.ones(len(extracted_normal[0]))
+    
     if args.layerID==len(hiddenLayerIDs)+1:
         layer = model.get_layer(name=f"output")
     else:
         layer = model.get_layer(name=f"layer{args.layerID-1}")
     weight_matrix_layer, _ = layer.get_weights()
     weight_matrix_layer = np.array(weight_matrix_layer)
+
     if len(args.tgtNeurons)==len(weight_matrix_layer[0]): #If we have extracted sign of all neurons then save extracted model
         original_weight, original_bias = layer.get_weights()
         extracted_weight,extracted_bias = weights[-1].copy(),biases[-1].copy()
         indices_diff = []
         for i in range(len(original_weight.T)):
+            print("Neuron: ",i)
             if np.sign(extracted_weight[0][i]) != np.sign(extracted_signs[i]):
                 extracted_weight.T[i]*=-1
                 extracted_bias[i]*=-1
             weights_equal_exact = np.array_equal(np.sign(original_weight.T[i]), np.sign(extracted_weight.T[i]))
             biases_equal_exact = np.sign(original_bias[i]) == np.sign(extracted_bias[i])
             print("Equal weights and biases: ",weights_equal_exact,biases_equal_exact)
+
+            distance = np.linalg.norm(np.abs(original_weight.T[i]) - np.abs(extracted_weight.T[i]))
+            if distance>1e-3:
+                print("Distance between original and extracted weight: ",distance)
+                if debug:
+                    print("Right weights:", original_weight.T[i])
+                    print("Extracted weights:", extracted_weight.T[i])
+            else:
+                print("absolute values of weights are close enough")
+
             if not weights_equal_exact:
+                if debug:
+                    print("Right weights:", original_weight.T[i])
+                    print("Extracted weights:", extracted_weight.T[i])
                 indices_diff.append(i)
         layer.set_weights([extracted_weight,extracted_bias])
         # Set output activation to original activation
         model.layers[-1].activation = original_activation
         original_weight, original_bias = layer.get_weights()
         print("Different indices: ", indices_diff)
+
+
+
+
+
+        
         # Save the newly extracted model as a tensorflow model
-        model.save(model_save_path)
+        # model.save(model_save_path)

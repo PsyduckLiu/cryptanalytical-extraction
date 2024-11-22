@@ -11,7 +11,8 @@ from tensorflow.keras.datasets import mnist
 
 def make_new_mnist_model(hidden_size, layer_number):
     # Load MNIST dataset
-    tf.random.set_seed(42)
+    seed = 0
+    tf.random.set_seed(seed)
     (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
     # Normalize pixel values to be between 0 and 1 and flatten the input
@@ -51,7 +52,7 @@ def make_new_mnist_model(hidden_size, layer_number):
     model.summary()
 
     # Saving model path modified for MNIST
-    model_save_path = f"models/mnist784_{hidden_size}x{layer_number}_1v2.keras"
+    model_save_path = f"models/mnist784_{hidden_size}x{layer_number}_1v2_{seed}.keras"
     model.save(model_save_path)
     for l in model.layers:
         if len(l.get_weights()) > 0:
@@ -60,7 +61,7 @@ def make_new_mnist_model(hidden_size, layer_number):
             print("Bias: ", b)
     return model_save_path
 
-make_new_mnist_model(16,2)
+make_new_mnist_model(16,8)
 
 def make_new_rescaled_model(model_path,scale):
     model = tf.keras.models.load_model(model_path)
@@ -112,10 +113,10 @@ def make_new_random_model_carlini(input_size, hidden_size, number_layers, random
     model.summary()
 
     # Saving the model
-    model_save_path = f'deti/models/{input_size}_{hidden_size}x{number_layers}_{output_size}_Seed{random_seed}.keras'
+    model_save_path = f'models/{input_size}_{hidden_size}x{number_layers}_{output_size}_Seed{random_seed}.keras'
     model.save(model_save_path)
 
-#make_new_random_model_carlini(784,16,8,42)
+# make_new_random_model_carlini(300,10,2,0)
 
 def make_new_cifar_model(hidden_size,layer_number):
     # Load CIFAR-10 dataset

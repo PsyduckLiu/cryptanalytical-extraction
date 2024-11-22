@@ -1,0 +1,42 @@
+
+Check the solution of the last weight matrix.
+Neuron 0 maps on to neuron 3 with error 3.5601280475552286e-06 ratio -0.10368262080191698
+Bias check [-0.00063985]
+Neuron 1 maps on to neuron 6 with error 4.3572748827573905e-06 ratio 0.12575683228790213
+Bias check [-0.00894266]
+Neuron 2 maps on to neuron 2 with error 5.246664516961121e-06 ratio -0.14751208268253813
+Bias check [0.00135648]
+Neuron 3 maps on to neuron 7 with error 3.179586577261833e-06 ratio -0.027174669531355826
+Bias check [0.00176862]
+Neuron 4 maps on to neuron 0 with error 4.5754952224459445e-06 ratio 0.11787230306471136
+Bias check [0.00103327]
+Neuron 5 maps on to neuron 1 with error 2.2328869174832515e-06 ratio -0.12298783699341834
+Bias check [-0.0002136]
+Neuron 6 maps on to neuron 9 with error 7.4473965095992385e-06 ratio 0.112550130843728
+Bias check [-0.0018842]
+Neuron 7 maps on to neuron 4 with error 9.738025327598433e-06 ratio 0.1366059801926312
+Bias check [0.00509403]
+Neuron 8 maps on to neuron 5 with error 1.2787618698041856e-05 ratio -0.16128645814687392
+Bias check [-0.00031123]
+Neuron 9 maps on to neuron 8 with error 6.973222293595353e-06 ratio 0.1395950189945368
+Bias check [0.02505087]
+Original Neuron 0 maps on to recovered neuron 4
+absolute values of weights are close enough
+Original Neuron 1 maps on to recovered neuron 5
+absolute values of weights are close enough
+Original Neuron 2 maps on to recovered neuron 2
+ERROR LAYER EXTRACTED INCORRECTLY
+Original Neuron 3 maps on to recovered neuron 0
+absolute values of weights are close enough
+Original Neuron 4 maps on to recovered neuron 7
+ERROR LAYER EXTRACTED INCORRECTLY
+Original Neuron 5 maps on to recovered neuron 8
+absolute values of weights are close enough
+Original Neuron 6 maps on to recovered neuron 1
+ERROR LAYER EXTRACTED INCORRECTLY
+Original Neuron 7 maps on to recovered neuron 3
+ERROR LAYER EXTRACTED INCORRECTLY
+Original Neuron 8 maps on to recovered neuron 9
+ERROR LAYER EXTRACTED INCORRECTLY
+Original Neuron 9 maps on to recovered neuron 6
+ERROR LAYER EXTRACTED INCORRECTLY

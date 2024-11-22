@@ -1,7 +1,7 @@
 import tensorflow as tf
 import numpy as np
 
-model_path = "models/mnist784_16x8_1v2.keras"
+model_path = '/home/haolin/workspace/results/model_extraction/checkpoints/tf/carlini/dense/10_8x2/linear/20241122-152802/model.keras'
 model = tf.keras.models.load_model(model_path)
 
 A = []

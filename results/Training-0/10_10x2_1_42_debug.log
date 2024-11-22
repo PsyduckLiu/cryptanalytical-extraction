@@ -1,0 +1,1453 @@
+2024-11-20 19:11:17.293950: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-11-20 19:11:17.313041: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2024-11-20 19:11:17.313066: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2024-11-20 19:11:17.313572: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-11-20 19:11:17.316576: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-11-20 19:11:17.633897: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+INFO:root:
+    # ---------------------------------------------------
+    # Starting extracting weights and biases.
+    # ---------------------------------------------------   
+    
+INFO:root:Parsed arguments for signature and sign recovery: 
+	 Namespace(model='models/10_10x2_1_Seed0.keras', layerID=1, tgtNeurons=None, dataset=None, eps=8, quantized=2, onlySign=False, signRecoveryMethod='neuronWiggle', seed=42, setting='original', nExp=15).
+2024-11-20 19:11:18.206628: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:901] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-11-20 19:11:18.225011: W tensorflow/core/common_runtime/gpu/gpu_device.cc:2256] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+INFO:root:Model summary:
+Model: "model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input_layer (InputLayer)    [(None, 10)]              0         
+                                                                 
+ layer0 (Dense)              (None, 10)                110       
+                                                                 
+ layer1 (Dense)              (None, 10)                110       
+                                                                 
+ output (Dense)              (None, 1)                 11        
+                                                                 
+=================================================================
+Total params: 231 (1.80 KB)
+Trainable params: 231 (1.80 KB)
+Non-trainable params: 0 (0.00 Byte)
+_________________________________________________________________
+INFO:root:None
+INFO:root:Signature and Sign recovery results will be saved to 
+	 results/model_10_10x2_1_Seed0/layerID_1/nExp_15-Seed42_float32_original/df.md
+INFO:root:Recovering signatures...
+Weights and biases extracted from whitebox model.
+
+Start running critical point search to find neurons on layer 0
+At this iteration I have 0 critical points
+Gathering 30 critical points
+Start another sweep
+Total intersections found 24
+Trying to get ratios for point -1047.1504065812262
+Up to 1 of 30
+Trying to get ratios for point -927.7509401525754
+Up to 2 of 30
+Trying to get ratios for point -428.27697375599064
+Up to 3 of 30
+Trying to get ratios for point -58.16358044804977
+Up to 4 of 30
+Trying to get ratios for point -58.116792315897214
+Up to 5 of 30
+Trying to get ratios for point -48.05186888217301
+Up to 6 of 30
+Trying to get ratios for point -39.88727257124207
+Up to 7 of 30
+Trying to get ratios for point -34.16620209591672
+Up to 8 of 30
+Trying to get ratios for point -30.05197897537736
+Up to 9 of 30
+Trying to get ratios for point -23.37993395265785
+Up to 10 of 30
+Trying to get ratios for point -4.358436568129724
+Up to 11 of 30
+Trying to get ratios for point 1.7327763045804474
+Up to 12 of 30
+Trying to get ratios for point 2.9263152024252665
+Up to 13 of 30
+Trying to get ratios for point 5.443659033531442
+Up to 14 of 30
+Trying to get ratios for point 14.006531539426934
+Up to 15 of 30
+Trying to get ratios for point 15.822324680282826
+Up to 16 of 30
+Trying to get ratios for point 23.553676834862674
+Up to 17 of 30
+Trying to get ratios for point 26.04309556487526
+Up to 18 of 30
+Trying to get ratios for point 29.526694311714678
+Up to 19 of 30
+Trying to get ratios for point 34.8454773195917
+Up to 20 of 30
+Trying to get ratios for point 41.08286442510493
+Up to 21 of 30
+Trying to get ratios for point 92.46089327224152
+Up to 22 of 30
+Trying to get ratios for point 97.03503380495378
+Up to 23 of 30
+Trying to get ratios for point 165.69912596208738
+Up to 24 of 30
+Start another sweep
+Total intersections found 15
+Trying to get ratios for point 86.52006089770921
+Up to 25 of 30
+Trying to get ratios for point 52.932387323579405
+Up to 26 of 30
+Trying to get ratios for point 44.21126745457484
+Up to 27 of 30
+Trying to get ratios for point 37.88835816553555
+Up to 28 of 30
+Trying to get ratios for point 30.864153762335764
+Up to 29 of 30
+Trying to get ratios for point 22.596061487756945
+Up to 30 of 30
+And now up to  30 critical points
+CP  0 is a critical point of layer 1 Neuron 2
+CP  1 is a critical point of layer 1 Neuron 6
+CP  2 is a critical point of layer 1 Neuron 5
+CP  3 is a critical point of layer 1 Neuron 10
+CP  4 is a critical point of layer 2 Neuron 10
+CP  5 is a critical point of layer 2 Neuron 3
+CP  6 is a critical point of layer 2 Neuron 4
+CP  7 is a critical point of layer 2 Neuron 5
+CP  8 is a critical point of layer 2 Neuron 1
+CP  9 is a critical point of layer 1 Neuron 4
+CP  10 is a critical point of layer 1 Neuron 3
+CP  11 is a critical point of layer 2 Neuron 6
+CP  12 is a critical point of layer 2 Neuron 10
+CP  13 is a critical point of layer 1 Neuron 9
+CP  14 is a critical point of layer 1 Neuron 1
+CP  15 is a critical point of layer 2 Neuron 6
+CP  16 is a critical point of layer 2 Neuron 1
+CP  17 is a critical point of layer 2 Neuron 10
+CP  18 is a critical point of layer 2 Neuron 2
+CP  19 is a critical point of layer 2 Neuron 3
+CP  20 is a critical point of layer 1 Neuron 7
+CP  21 is a critical point of layer 2 Neuron 8
+CP  22 is a critical point of layer 2 Neuron 7
+CP  23 is a critical point of layer 1 Neuron 8
+CP  24 is a critical point of layer 1 Neuron 6
+CP  25 is a critical point of layer 1 Neuron 7
+CP  26 is a critical point of layer 1 Neuron 2
+CP  27 is a critical point of layer 2 Neuron 2
+CP  28 is a critical point of layer 2 Neuron 7
+CP  29 is a critical point of layer 2 Neuron 1
+After filtering duplicates we're down to  30 critical points
+Start trying to do the graph solving
+Length criticals group, all ratios group:  30 30
+Block multiply factor:  2
+Go up to 1
+batch_index: 0
+Sorted components:  [{0, 26}, {24, 1}, {25, 20}]
+Graph search found 3 different components with the following counts [2, 2, 2]
+Previous number of components inf
+candidate_components [{0, 26}, {24, 1}, {25, 20}]
+Length of candidate rows 3
+After re-doing the graph, the component counts is 3 with items [2, 2, 2]
+Processing each connected component in turn.
+On component 0 with indexs [0, 26]
+On component 1 with indexs [24, 1]
+On component 2 with indexs [25, 20]
+
+
+-------------------------
+On component 0 with indexs [0, 26]
+Guessed row:  [ 1.         -1.11400656  0.8053555  -0.87786169 -0.32681222 -0.3963333
+  0.20150834 -0.8304873  -1.03935149  0.85339838]
+The guessed error in the computation is 2.4739336412782365e-09 with 2 witnesses
+Normalize on axis 0
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-1047.1504065812262, 44.21126745457484]
+Guessed row converting nan to 0:  [ 1.         -1.11400656  0.8053555  -0.87786169 -0.32681222 -0.3963333
+  0.20150834 -0.8304873  -1.03935149  0.85339838]
+Don't add it to the set
+
+
+-------------------------
+On component 1 with indexs [24, 1]
+Guessed row:  [-0.1884142  -0.71522386 -0.36276576  1.         -0.36679917 -0.38076506
+  0.80687297  0.06155865  0.61258559 -0.29742286]
+The guessed error in the computation is 1.1698503249446546e-08 with 2 witnesses
+Normalize on axis 3
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [86.52006089770921, -927.7509401525754]
+Guessed row converting nan to 0:  [-0.1884142  -0.71522386 -0.36276576  1.         -0.36679917 -0.38076506
+  0.80687297  0.06155865  0.61258559 -0.29742286]
+Don't add it to the set
+
+
+-------------------------
+On component 2 with indexs [25, 20]
+Guessed row:  [ 1.          0.37239986  0.79943476 -0.40868221 -0.35738655  0.30081269
+  0.22959941 -0.11286894  0.65828188  0.46616797]
+The guessed error in the computation is 5.020149573820021e-10 with 2 witnesses
+Normalize on axis 0
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [52.932387323579405, 41.08286442510493]
+Guessed row converting nan to 0:  [ 1.          0.37239986  0.79943476 -0.40868221 -0.35738655  0.30081269
+  0.22959941 -0.11286894  0.65828188  0.46616797]
+Don't add it to the set
+-------------------------
+All irrelevant indices:  []
+len(all_ratios):  30
+len(resulting_rows):  0
+We have not explored all neurons. Do more random search
+Length of resulting_rows 0
+The number of skips_because_of_nan 0
+The expected_neurons are 10
+Failure reason:  None
+Branch 1
+*********************************
+Graph solving failed; get more points
+AcceptableFailure
+e.irr_idx []
+e.partial_solution 0
+*********************************
+At this iteration I have 30 critical points
+Gathering 10 critical points
+Trying to get ratios for point 21.20230865631969
+Up to 1 of 10
+Trying to get ratios for point 14.089580164265517
+Up to 2 of 10
+Trying to get ratios for point 9.632137246112816
+Up to 3 of 10
+Trying to get ratios for point 5.96383796756869
+Up to 4 of 10
+Trying to get ratios for point 5.112193654251374
+Up to 5 of 10
+Trying to get ratios for point 2.499538631351191
+Up to 6 of 10
+Trying to get ratios for point -4.277468289387748
+Up to 7 of 10
+Trying to get ratios for point -23.63379483127965
+Up to 8 of 10
+Trying to get ratios for point -48.01591610746205
+Up to 9 of 10
+Start another sweep
+Total intersections found 19
+Trying to get ratios for point 6388.898984848715
+Up to 10 of 10
+And now up to  40 critical points
+CP  0 is a critical point of layer 1 Neuron 2
+CP  1 is a critical point of layer 1 Neuron 6
+CP  2 is a critical point of layer 1 Neuron 5
+CP  3 is a critical point of layer 1 Neuron 10
+CP  4 is a critical point of layer 2 Neuron 10
+CP  5 is a critical point of layer 2 Neuron 3
+CP  6 is a critical point of layer 2 Neuron 4
+CP  7 is a critical point of layer 2 Neuron 5
+CP  8 is a critical point of layer 2 Neuron 1
+CP  9 is a critical point of layer 1 Neuron 4
+CP  10 is a critical point of layer 1 Neuron 3
+CP  11 is a critical point of layer 2 Neuron 6
+CP  12 is a critical point of layer 2 Neuron 10
+CP  13 is a critical point of layer 1 Neuron 9
+CP  14 is a critical point of layer 1 Neuron 1
+CP  15 is a critical point of layer 2 Neuron 6
+CP  16 is a critical point of layer 2 Neuron 1
+CP  17 is a critical point of layer 2 Neuron 10
+CP  18 is a critical point of layer 2 Neuron 2
+CP  19 is a critical point of layer 2 Neuron 3
+CP  20 is a critical point of layer 1 Neuron 7
+CP  21 is a critical point of layer 2 Neuron 8
+CP  22 is a critical point of layer 2 Neuron 7
+CP  23 is a critical point of layer 1 Neuron 8
+CP  24 is a critical point of layer 1 Neuron 6
+CP  25 is a critical point of layer 1 Neuron 7
+CP  26 is a critical point of layer 1 Neuron 2
+CP  27 is a critical point of layer 2 Neuron 2
+CP  28 is a critical point of layer 2 Neuron 7
+CP  29 is a critical point of layer 2 Neuron 1
+CP  30 is a critical point of layer 1 Neuron 9
+CP  31 is a critical point of layer 1 Neuron 1
+CP  32 is a critical point of layer 1 Neuron 3
+CP  33 is a critical point of layer 2 Neuron 5
+CP  34 is a critical point of layer 1 Neuron 5
+CP  35 is a critical point of layer 1 Neuron 4
+CP  36 is a critical point of layer 1 Neuron 8
+CP  37 is a critical point of layer 2 Neuron 3
+CP  38 is a critical point of layer 1 Neuron 10
+CP  39 is a critical point of layer 2 Neuron 8
+After filtering duplicates we're down to  40 critical points
+Start trying to do the graph solving
+Length criticals group, all ratios group:  40 40
+Block multiply factor:  2
+Go up to 1
+batch_index: 0
+Sorted components:  [{0, 26}, {24, 1}, {2, 34}, {3, 38}, {9, 35}, {32, 10}, {13, 30}, {14, 31}, {25, 20}, {36, 23}]
+Graph search found 10 different components with the following counts [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+Previous number of components inf
+candidate_components [{0, 26}, {24, 1}, {2, 34}, {3, 38}, {9, 35}, {32, 10}, {13, 30}, {14, 31}, {25, 20}, {36, 23}]
+Length of candidate rows 10
+After re-doing the graph, the component counts is 10 with items [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+Processing each connected component in turn.
+On component 0 with indexs [0, 26]
+On component 1 with indexs [24, 1]
+On component 2 with indexs [2, 34]
+On component 3 with indexs [3, 38]
+On component 4 with indexs [9, 35]
+On component 5 with indexs [32, 10]
+On component 6 with indexs [13, 30]
+On component 7 with indexs [14, 31]
+On component 8 with indexs [25, 20]
+On component 9 with indexs [36, 23]
+
+
+-------------------------
+On component 0 with indexs [0, 26]
+Guessed row:  [ 1.         -1.11400656  0.8053555  -0.87786169 -0.32681222 -0.3963333
+  0.20150834 -0.8304873  -1.03935149  0.85339838]
+The guessed error in the computation is 2.4739336412782365e-09 with 2 witnesses
+Normalize on axis 0
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-1047.1504065812262, 44.21126745457484]
+Guessed row converting nan to 0:  [ 1.         -1.11400656  0.8053555  -0.87786169 -0.32681222 -0.3963333
+  0.20150834 -0.8304873  -1.03935149  0.85339838]
+Don't add it to the set
+
+
+-------------------------
+On component 1 with indexs [24, 1]
+Guessed row:  [-0.1884142  -0.71522386 -0.36276576  1.         -0.36679917 -0.38076506
+  0.80687297  0.06155865  0.61258559 -0.29742286]
+The guessed error in the computation is 1.1698503249446546e-08 with 2 witnesses
+Normalize on axis 3
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [86.52006089770921, -927.7509401525754]
+Guessed row converting nan to 0:  [-0.1884142  -0.71522386 -0.36276576  1.         -0.36679917 -0.38076506
+  0.80687297  0.06155865  0.61258559 -0.29742286]
+Don't add it to the set
+
+
+-------------------------
+On component 2 with indexs [2, 34]
+Guessed row:  [-1.01706597 -0.72715513 -1.48542654  0.80286507 -1.22311853 -1.72398476
+  1.         -2.90741993 -0.02997132  1.23556702]
+The guessed error in the computation is 1.4850651199570242e-07 with 2 witnesses
+Normalize on axis 6
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-428.27697375599064, 5.112193654251374]
+Guessed row converting nan to 0:  [-1.01706597 -0.72715513 -1.48542654  0.80286507 -1.22311853 -1.72398476
+  1.         -2.90741993 -0.02997132  1.23556702]
+Don't add it to the set
+
+
+-------------------------
+On component 3 with indexs [3, 38]
+Guessed row:  [ 1.03097461  0.4129184   1.75378392 -0.65596298 -0.6879752   0.22765216
+  0.54140462  1.          1.29826392  1.06893017]
+The guessed error in the computation is 5.503986988397713e-10 with 2 witnesses
+Normalize on axis 7
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-58.16358044804977, -48.01591610746205]
+Guessed row converting nan to 0:  [ 1.03097461  0.4129184   1.75378392 -0.65596298 -0.6879752   0.22765216
+  0.54140462  1.          1.29826392  1.06893017]
+Don't add it to the set
+
+
+-------------------------
+On component 4 with indexs [9, 35]
+Guessed row:  [-1.04649751  1.56129201  0.44687461  1.          0.44466847 -0.55285411
+ -0.78062975  0.2633484  -0.45225158  0.61464532]
+The guessed error in the computation is 6.612602132527456e-11 with 2 witnesses
+Normalize on axis 3
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-23.37993395265785, 2.499538631351191]
+Guessed row converting nan to 0:  [-1.04649751  1.56129201  0.44687461  1.          0.44466847 -0.55285411
+ -0.78062975  0.2633484  -0.45225158  0.61464532]
+Don't add it to the set
+
+
+-------------------------
+On component 5 with indexs [32, 10]
+Guessed row:  [ 0.43513688  0.20839842 -0.1901944  -0.78010092  1.          0.68358082
+  0.97414665 -0.29329124  0.49523902  0.54188368]
+The guessed error in the computation is 1.7768792609507145e-07 with 2 witnesses
+Normalize on axis 4
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [9.632137246112816, -4.358436568129724]
+Guessed row converting nan to 0:  [ 0.43513688  0.20839842 -0.1901944  -0.78010092  1.          0.68358082
+  0.97414665 -0.29329124  0.49523902  0.54188368]
+Don't add it to the set
+
+
+-------------------------
+On component 6 with indexs [13, 30]
+Guessed row:  [-0.05909059  0.6781584   0.06100719  0.14097175  0.53870414  1.
+ -0.22402689 -0.61254494  0.38339716  0.6537735 ]
+The guessed error in the computation is 5.184872531316387e-10 with 2 witnesses
+Normalize on axis 5
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [5.443659033531442, 21.20230865631969]
+Guessed row converting nan to 0:  [-0.05909059  0.6781584   0.06100719  0.14097175  0.53870414  1.
+ -0.22402689 -0.61254494  0.38339716  0.6537735 ]
+Don't add it to the set
+
+
+-------------------------
+On component 7 with indexs [14, 31]
+Guessed row:  [ 0.69702988  0.27817334 -0.64577194  0.7466244  -0.4516972   1.38873397
+  0.16414624  0.84647407 -1.14189202  1.        ]
+The guessed error in the computation is 1.3840456558611436e-12 with 2 witnesses
+Normalize on axis 9
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [14.006531539426934, 14.089580164265517]
+Guessed row converting nan to 0:  [ 0.69702988  0.27817334 -0.64577194  0.7466244  -0.4516972   1.38873397
+  0.16414624  0.84647407 -1.14189202  1.        ]
+Don't add it to the set
+
+
+-------------------------
+On component 8 with indexs [25, 20]
+Guessed row:  [ 1.          0.37239986  0.79943476 -0.40868221 -0.35738655  0.30081269
+  0.22959941 -0.11286894  0.65828188  0.46616797]
+The guessed error in the computation is 5.020149573820021e-10 with 2 witnesses
+Normalize on axis 0
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [52.932387323579405, 41.08286442510493]
+Guessed row converting nan to 0:  [ 1.          0.37239986  0.79943476 -0.40868221 -0.35738655  0.30081269
+  0.22959941 -0.11286894  0.65828188  0.46616797]
+Don't add it to the set
+
+
+-------------------------
+On component 9 with indexs [36, 23]
+Guessed row:  [ 0.40951451  0.73026413  0.26692933  0.18744164  0.18211925  0.82846995
+ -0.1393132   1.08344931 -0.13545876  1.        ]
+The guessed error in the computation is 3.1455949234260316e-09 with 2 witnesses
+Normalize on axis 9
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-4.277468289387748, 165.69912596208738]
+Guessed row converting nan to 0:  [ 0.40951451  0.73026413  0.26692933  0.18744164  0.18211925  0.82846995
+ -0.1393132   1.08344931 -0.13545876  1.        ]
+Don't add it to the set
+-------------------------
+All irrelevant indices:  []
+len(all_ratios):  40
+len(resulting_rows):  0
+We have not explored all neurons. Do more random search
+Length of resulting_rows 0
+The number of skips_because_of_nan 0
+The expected_neurons are 10
+Failure reason:  None
+Branch 1
+*********************************
+Graph solving failed; get more points
+AcceptableFailure
+e.irr_idx []
+e.partial_solution 0
+*********************************
+At this iteration I have 40 critical points
+Gathering 10 critical points
+Trying to get ratios for point 367.1028804523844
+Up to 1 of 10
+Trying to get ratios for point 273.022555396817
+Up to 2 of 10
+Trying to get ratios for point 247.5850858996235
+Up to 3 of 10
+Trying to get ratios for point 202.29510333448724
+Up to 4 of 10
+Trying to get ratios for point 190.3489990099192
+Up to 5 of 10
+Trying to get ratios for point 188.99570656715605
+Up to 6 of 10
+Trying to get ratios for point 185.53781516842585
+Up to 7 of 10
+Trying to get ratios for point 179.62992460478827
+Up to 8 of 10
+Trying to get ratios for point 178.08051535588817
+Up to 9 of 10
+Trying to get ratios for point 176.10076856602208
+Up to 10 of 10
+And now up to  50 critical points
+CP  0 is a critical point of layer 1 Neuron 2
+CP  1 is a critical point of layer 1 Neuron 6
+CP  2 is a critical point of layer 1 Neuron 5
+CP  3 is a critical point of layer 1 Neuron 10
+CP  4 is a critical point of layer 2 Neuron 10
+CP  5 is a critical point of layer 2 Neuron 3
+CP  6 is a critical point of layer 2 Neuron 4
+CP  7 is a critical point of layer 2 Neuron 5
+CP  8 is a critical point of layer 2 Neuron 1
+CP  9 is a critical point of layer 1 Neuron 4
+CP  10 is a critical point of layer 1 Neuron 3
+CP  11 is a critical point of layer 2 Neuron 6
+CP  12 is a critical point of layer 2 Neuron 10
+CP  13 is a critical point of layer 1 Neuron 9
+CP  14 is a critical point of layer 1 Neuron 1
+CP  15 is a critical point of layer 2 Neuron 6
+CP  16 is a critical point of layer 2 Neuron 1
+CP  17 is a critical point of layer 2 Neuron 10
+CP  18 is a critical point of layer 2 Neuron 2
+CP  19 is a critical point of layer 2 Neuron 3
+CP  20 is a critical point of layer 1 Neuron 7
+CP  21 is a critical point of layer 2 Neuron 8
+CP  22 is a critical point of layer 2 Neuron 7
+CP  23 is a critical point of layer 1 Neuron 8
+CP  24 is a critical point of layer 1 Neuron 6
+CP  25 is a critical point of layer 1 Neuron 7
+CP  26 is a critical point of layer 1 Neuron 2
+CP  27 is a critical point of layer 2 Neuron 2
+CP  28 is a critical point of layer 2 Neuron 7
+CP  29 is a critical point of layer 2 Neuron 1
+CP  30 is a critical point of layer 1 Neuron 9
+CP  31 is a critical point of layer 1 Neuron 1
+CP  32 is a critical point of layer 1 Neuron 3
+CP  33 is a critical point of layer 2 Neuron 5
+CP  34 is a critical point of layer 1 Neuron 5
+CP  35 is a critical point of layer 1 Neuron 4
+CP  36 is a critical point of layer 1 Neuron 8
+CP  37 is a critical point of layer 2 Neuron 3
+CP  38 is a critical point of layer 1 Neuron 10
+CP  39 is a critical point of layer 2 Neuron 8
+CP  40 is a critical point of layer 2 Neuron 1
+CP  41 is a critical point of layer 2 Neuron 3
+CP  42 is a critical point of layer 2 Neuron 7
+CP  43 is a critical point of layer 1 Neuron 4
+CP  44 is a critical point of layer 1 Neuron 6
+CP  45 is a critical point of layer 2 Neuron 6
+CP  46 is a critical point of layer 2 Neuron 5
+CP  47 is a critical point of layer 2 Neuron 9
+CP  48 is a critical point of layer 1 Neuron 10
+CP  49 is a critical point of layer 2 Neuron 7
+After filtering duplicates we're down to  50 critical points
+Start trying to do the graph solving
+Length criticals group, all ratios group:  50 50
+Block multiply factor:  2
+Go up to 1
+batch_index: 0
+Sorted components:  [{24, 1, 44}, {48, 3, 38}, {9, 35, 43}, {0, 26}, {2, 34}, {32, 10}, {13, 30}, {14, 31}, {25, 20}, {36, 23}]
+Graph search found 10 different components with the following counts [3, 3, 3, 2, 2, 2, 2, 2, 2, 2]
+Previous number of components inf
+candidate_components [{24, 1, 44}, {48, 3, 38}, {9, 35, 43}, {0, 26}, {2, 34}, {32, 10}, {13, 30}, {14, 31}, {25, 20}, {36, 23}]
+Length of candidate rows 10
+After re-doing the graph, the component counts is 10 with items [3, 3, 3, 2, 2, 2, 2, 2, 2, 2]
+Processing each connected component in turn.
+On component 0 with indexs [24, 1, 44]
+On component 1 with indexs [48, 3, 38]
+On component 2 with indexs [9, 35, 43]
+On component 3 with indexs [0, 26]
+On component 4 with indexs [2, 34]
+On component 5 with indexs [32, 10]
+On component 6 with indexs [13, 30]
+On component 7 with indexs [14, 31]
+On component 8 with indexs [25, 20]
+On component 9 with indexs [36, 23]
+
+
+-------------------------
+On component 0 with indexs [24, 1, 44]
+Guessed row:  [ -3.06068497 -11.61818205  -5.89285022  16.24414249  -5.95828344
+  -6.18520434  13.10699542   1.           9.95090444  -4.83135944]
+The guessed error in the computation is 1.4852825375721856e-05 with 3 witnesses
+Normalize on axis 7
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [86.52006089770921, -927.7509401525754, 190.3489990099192]
+Guessed row converting nan to 0:  [ -3.06068497 -11.61818205  -5.89285022  16.24414249  -5.95828344
+  -6.18520434  13.10699542   1.           9.95090444  -4.83135944]
+
+
+-------------------------
+On component 1 with indexs [48, 3, 38]
+Guessed row:  [ 1.03097608  0.41291783  1.75378043 -0.65596285 -0.68797444  0.22765275
+  0.54140579  1.          1.29825977  1.06893281]
+The guessed error in the computation is 5.798302337806094e-05 with 3 witnesses
+Normalize on axis 7
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [178.08051535588817, -58.16358044804977, -48.01591610746205]
+Guessed row converting nan to 0:  [ 1.03097608  0.41291783  1.75378043 -0.65596285 -0.68797444  0.22765275
+  0.54140579  1.          1.29825977  1.06893281]
+
+
+-------------------------
+On component 2 with indexs [9, 35, 43]
+Guessed row:  [-1.04649779  1.56129052  0.44687464  1.          0.44466743 -0.55285415
+ -0.78062933  0.26334851 -0.45225216  0.61464533]
+The guessed error in the computation is 1.0214289419080425e-05 with 3 witnesses
+Normalize on axis 3
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-23.37993395265785, 2.499538631351191, 202.29510333448724]
+Guessed row converting nan to 0:  [-1.04649779  1.56129052  0.44687464  1.          0.44466743 -0.55285415
+ -0.78062933  0.26334851 -0.45225216  0.61464533]
+
+
+-------------------------
+On component 3 with indexs [0, 26]
+Guessed row:  [ 1.         -1.11400656  0.8053555  -0.87786169 -0.32681222 -0.3963333
+  0.20150834 -0.8304873  -1.03935149  0.85339838]
+The guessed error in the computation is 2.4739336412782365e-09 with 2 witnesses
+Normalize on axis 0
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-1047.1504065812262, 44.21126745457484]
+Guessed row converting nan to 0:  [ 1.         -1.11400656  0.8053555  -0.87786169 -0.32681222 -0.3963333
+  0.20150834 -0.8304873  -1.03935149  0.85339838]
+Don't add it to the set
+
+
+-------------------------
+On component 4 with indexs [2, 34]
+Guessed row:  [-1.01706597 -0.72715513 -1.48542654  0.80286507 -1.22311853 -1.72398476
+  1.         -2.90741993 -0.02997132  1.23556702]
+The guessed error in the computation is 1.4850651199570242e-07 with 2 witnesses
+Normalize on axis 6
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-428.27697375599064, 5.112193654251374]
+Guessed row converting nan to 0:  [-1.01706597 -0.72715513 -1.48542654  0.80286507 -1.22311853 -1.72398476
+  1.         -2.90741993 -0.02997132  1.23556702]
+Don't add it to the set
+
+
+-------------------------
+On component 5 with indexs [32, 10]
+Guessed row:  [ 0.43513688  0.20839842 -0.1901944  -0.78010092  1.          0.68358082
+  0.97414665 -0.29329124  0.49523902  0.54188368]
+The guessed error in the computation is 1.7768792609507145e-07 with 2 witnesses
+Normalize on axis 4
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [9.632137246112816, -4.358436568129724]
+Guessed row converting nan to 0:  [ 0.43513688  0.20839842 -0.1901944  -0.78010092  1.          0.68358082
+  0.97414665 -0.29329124  0.49523902  0.54188368]
+Don't add it to the set
+
+
+-------------------------
+On component 6 with indexs [13, 30]
+Guessed row:  [-0.05909059  0.6781584   0.06100719  0.14097175  0.53870414  1.
+ -0.22402689 -0.61254494  0.38339716  0.6537735 ]
+The guessed error in the computation is 5.184872531316387e-10 with 2 witnesses
+Normalize on axis 5
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [5.443659033531442, 21.20230865631969]
+Guessed row converting nan to 0:  [-0.05909059  0.6781584   0.06100719  0.14097175  0.53870414  1.
+ -0.22402689 -0.61254494  0.38339716  0.6537735 ]
+Don't add it to the set
+
+
+-------------------------
+On component 7 with indexs [14, 31]
+Guessed row:  [ 0.69702988  0.27817334 -0.64577194  0.7466244  -0.4516972   1.38873397
+  0.16414624  0.84647407 -1.14189202  1.        ]
+The guessed error in the computation is 1.3840456558611436e-12 with 2 witnesses
+Normalize on axis 9
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [14.006531539426934, 14.089580164265517]
+Guessed row converting nan to 0:  [ 0.69702988  0.27817334 -0.64577194  0.7466244  -0.4516972   1.38873397
+  0.16414624  0.84647407 -1.14189202  1.        ]
+Don't add it to the set
+
+
+-------------------------
+On component 8 with indexs [25, 20]
+Guessed row:  [ 1.          0.37239986  0.79943476 -0.40868221 -0.35738655  0.30081269
+  0.22959941 -0.11286894  0.65828188  0.46616797]
+The guessed error in the computation is 5.020149573820021e-10 with 2 witnesses
+Normalize on axis 0
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [52.932387323579405, 41.08286442510493]
+Guessed row converting nan to 0:  [ 1.          0.37239986  0.79943476 -0.40868221 -0.35738655  0.30081269
+  0.22959941 -0.11286894  0.65828188  0.46616797]
+Don't add it to the set
+
+
+-------------------------
+On component 9 with indexs [36, 23]
+Guessed row:  [ 0.40951451  0.73026413  0.26692933  0.18744164  0.18211925  0.82846995
+ -0.1393132   1.08344931 -0.13545876  1.        ]
+The guessed error in the computation is 3.1455949234260316e-09 with 2 witnesses
+Normalize on axis 9
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-4.277468289387748, 165.69912596208738]
+Guessed row converting nan to 0:  [ 0.40951451  0.73026413  0.26692933  0.18744164  0.18211925  0.82846995
+ -0.1393132   1.08344931 -0.13545876  1.        ]
+Don't add it to the set
+-------------------------
+All irrelevant indices:  []
+len(all_ratios):  50
+len(resulting_rows):  3
+We have not explored all neurons. Do more random search
+Length of resulting_rows 3
+The number of skips_because_of_nan 0
+The expected_neurons are 10
+Failure reason:  None
+Branch 1
+*********************************
+Graph solving failed; get more points
+AcceptableFailure
+e.irr_idx []
+e.partial_solution 3
+*********************************
+Got partial solution with shape (3, 10)
+hidden (3, 10)
+hidden (3, 10)
+hidden (3, 10)
+At this iteration I have 50 critical points
+Gathering 10 critical points
+Trying to get ratios for point 172.98340295257444
+Up to 1 of 10
+Trying to get ratios for point 169.68968210049482
+Up to 2 of 10
+Trying to get ratios for point 162.60777973119747
+Up to 3 of 10
+Trying to get ratios for point 159.33480766175526
+Up to 4 of 10
+Trying to get ratios for point 144.12309844988968
+Up to 5 of 10
+Trying to get ratios for point 137.80090736626855
+Up to 6 of 10
+Trying to get ratios for point 96.16067417592274
+Up to 7 of 10
+Trying to get ratios for point -23.114553656073014
+Up to 8 of 10
+Start another sweep
+Total intersections found 17
+Trying to get ratios for point 222.93190442823538
+Up to 9 of 10
+Trying to get ratios for point 179.2296963027793
+Up to 10 of 10
+And now up to  60 critical points
+CP  0 is a critical point of layer 1 Neuron 2
+CP  1 is a critical point of layer 1 Neuron 6
+CP  2 is a critical point of layer 1 Neuron 5
+CP  3 is a critical point of layer 1 Neuron 10
+CP  4 is a critical point of layer 2 Neuron 10
+CP  5 is a critical point of layer 2 Neuron 3
+CP  6 is a critical point of layer 2 Neuron 4
+CP  7 is a critical point of layer 2 Neuron 5
+CP  8 is a critical point of layer 2 Neuron 1
+CP  9 is a critical point of layer 1 Neuron 4
+CP  10 is a critical point of layer 1 Neuron 3
+CP  11 is a critical point of layer 2 Neuron 6
+CP  12 is a critical point of layer 2 Neuron 10
+CP  13 is a critical point of layer 1 Neuron 9
+CP  14 is a critical point of layer 1 Neuron 1
+CP  15 is a critical point of layer 2 Neuron 6
+CP  16 is a critical point of layer 2 Neuron 1
+CP  17 is a critical point of layer 2 Neuron 10
+CP  18 is a critical point of layer 2 Neuron 2
+CP  19 is a critical point of layer 2 Neuron 3
+CP  20 is a critical point of layer 1 Neuron 7
+CP  21 is a critical point of layer 2 Neuron 8
+CP  22 is a critical point of layer 2 Neuron 7
+CP  23 is a critical point of layer 1 Neuron 8
+CP  24 is a critical point of layer 1 Neuron 6
+CP  25 is a critical point of layer 1 Neuron 7
+CP  26 is a critical point of layer 1 Neuron 2
+CP  27 is a critical point of layer 2 Neuron 2
+CP  28 is a critical point of layer 2 Neuron 7
+CP  29 is a critical point of layer 2 Neuron 1
+CP  30 is a critical point of layer 1 Neuron 9
+CP  31 is a critical point of layer 1 Neuron 1
+CP  32 is a critical point of layer 1 Neuron 3
+CP  33 is a critical point of layer 2 Neuron 5
+CP  34 is a critical point of layer 1 Neuron 5
+CP  35 is a critical point of layer 1 Neuron 4
+CP  36 is a critical point of layer 1 Neuron 8
+CP  37 is a critical point of layer 2 Neuron 3
+CP  38 is a critical point of layer 1 Neuron 10
+CP  39 is a critical point of layer 2 Neuron 8
+CP  40 is a critical point of layer 2 Neuron 1
+CP  41 is a critical point of layer 2 Neuron 3
+CP  42 is a critical point of layer 2 Neuron 7
+CP  43 is a critical point of layer 1 Neuron 4
+CP  44 is a critical point of layer 1 Neuron 6
+CP  45 is a critical point of layer 2 Neuron 6
+CP  46 is a critical point of layer 2 Neuron 5
+CP  47 is a critical point of layer 2 Neuron 9
+CP  48 is a critical point of layer 1 Neuron 10
+CP  49 is a critical point of layer 2 Neuron 7
+CP  50 is a critical point of layer 2 Neuron 2
+CP  51 is a critical point of layer 2 Neuron 8
+CP  52 is a critical point of layer 1 Neuron 3
+CP  53 is a critical point of layer 1 Neuron 7
+CP  54 is a critical point of layer 1 Neuron 2
+CP  55 is a critical point of layer 1 Neuron 9
+CP  56 is a critical point of layer 2 Neuron 6
+CP  57 is a critical point of layer 1 Neuron 1
+CP  58 is a critical point of layer 1 Neuron 5
+CP  59 is a critical point of layer 2 Neuron 5
+After filtering duplicates we're down to  60 critical points
+Start trying to do the graph solving
+Length criticals group, all ratios group:  60 60
+Block multiply factor:  2
+Go up to 1
+batch_index: 0
+Sorted components:  [{0, 26, 54}, {24, 1, 44}, {2, 34, 58}, {48, 3, 38}, {9, 35, 43}, {32, 10, 52}, {13, 30, 55}, {57, 14, 31}, {25, 20, 53}, {36, 23}]
+Graph search found 10 different components with the following counts [3, 3, 3, 3, 3, 3, 3, 3, 3, 2]
+Previous number of components inf
+candidate_components [{0, 26, 54}, {24, 1, 44}, {2, 34, 58}, {48, 3, 38}, {9, 35, 43}, {32, 10, 52}, {13, 30, 55}, {57, 14, 31}, {25, 20, 53}, {36, 23}]
+Length of candidate rows 10
+After re-doing the graph, the component counts is 10 with items [3, 3, 3, 3, 3, 3, 3, 3, 3, 2]
+Processing each connected component in turn.
+On component 0 with indexs [0, 26, 54]
+On component 1 with indexs [24, 1, 44]
+On component 2 with indexs [2, 34, 58]
+On component 3 with indexs [48, 3, 38]
+On component 4 with indexs [9, 35, 43]
+On component 5 with indexs [32, 10, 52]
+On component 6 with indexs [13, 30, 55]
+On component 7 with indexs [57, 14, 31]
+On component 8 with indexs [25, 20, 53]
+On component 9 with indexs [36, 23]
+
+
+-------------------------
+On component 0 with indexs [0, 26, 54]
+Guessed row:  [ 1.         -1.11400465  0.80535227 -0.87786061 -0.32681398 -0.39633244
+  0.2015112  -0.83048663 -1.03935661  0.85339703]
+The guessed error in the computation is 0.00021100596692033569 with 3 witnesses
+Normalize on axis 0
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-1047.1504065812262, 44.21126745457484, 144.12309844988968]
+Guessed row converting nan to 0:  [ 1.         -1.11400465  0.80535227 -0.87786061 -0.32681398 -0.39633244
+  0.2015112  -0.83048663 -1.03935661  0.85339703]
+
+
+-------------------------
+On component 1 with indexs [24, 1, 44]
+Guessed row:  [ -3.06068497 -11.61818205  -5.89285022  16.24414249  -5.95828344
+  -6.18520434  13.10699542   1.           9.95090444  -4.83135944]
+The guessed error in the computation is 1.4852825375721856e-05 with 3 witnesses
+Normalize on axis 7
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [86.52006089770921, -927.7509401525754, 190.3489990099192]
+Guessed row converting nan to 0:  [ -3.06068497 -11.61818205  -5.89285022  16.24414249  -5.95828344
+  -6.18520434  13.10699542   1.           9.95090444  -4.83135944]
+
+
+-------------------------
+On component 2 with indexs [2, 34, 58]
+Guessed row:  [ 33.93615679  24.26258445  49.56366001 -26.78921164  40.81165657
+  57.52368705 -33.36688758  97.01160256   1.         -41.22736026]
+The guessed error in the computation is 0.0002682861929033109 with 3 witnesses
+Normalize on axis 8
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-428.27697375599064, 5.112193654251374, 222.93190442823538]
+Guessed row converting nan to 0:  [ 33.93615679  24.26258445  49.56366001 -26.78921164  40.81165657
+  57.52368705 -33.36688758  97.01160256   1.         -41.22736026]
+
+
+-------------------------
+On component 3 with indexs [48, 3, 38]
+Guessed row:  [ 1.03097608  0.41291783  1.75378043 -0.65596285 -0.68797444  0.22765275
+  0.54140579  1.          1.29825977  1.06893281]
+The guessed error in the computation is 5.798302337806094e-05 with 3 witnesses
+Normalize on axis 7
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [178.08051535588817, -58.16358044804977, -48.01591610746205]
+Guessed row converting nan to 0:  [ 1.03097608  0.41291783  1.75378043 -0.65596285 -0.68797444  0.22765275
+  0.54140579  1.          1.29825977  1.06893281]
+
+
+-------------------------
+On component 4 with indexs [9, 35, 43]
+Guessed row:  [-1.04649779  1.56129052  0.44687464  1.          0.44466743 -0.55285415
+ -0.78062933  0.26334851 -0.45225216  0.61464533]
+The guessed error in the computation is 1.0214289419080425e-05 with 3 witnesses
+Normalize on axis 3
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-23.37993395265785, 2.499538631351191, 202.29510333448724]
+Guessed row converting nan to 0:  [-1.04649779  1.56129052  0.44687464  1.          0.44466743 -0.55285415
+ -0.78062933  0.26334851 -0.45225216  0.61464533]
+
+
+-------------------------
+On component 5 with indexs [32, 10, 52]
+Guessed row:  [ 0.43511266  0.20839014 -0.19018159 -0.78010757  1.          0.68361517
+  0.97414673 -0.29327575  0.49527484  0.54190006]
+The guessed error in the computation is 4.745420403479139e-05 with 3 witnesses
+Normalize on axis 4
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [9.632137246112816, -4.358436568129724, 162.60777973119747]
+Guessed row converting nan to 0:  [ 0.43511266  0.20839014 -0.19018159 -0.78010757  1.          0.68361517
+  0.97414673 -0.29327575  0.49527484  0.54190006]
+
+
+-------------------------
+On component 6 with indexs [13, 30, 55]
+Guessed row:  [-0.05909017  0.6781584   0.06100764  0.14097192  0.53870417  1.
+ -0.22402688 -0.61254509  0.3833972   0.65377356]
+The guessed error in the computation is 5.090259822454479e-05 with 3 witnesses
+Normalize on axis 5
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [5.443659033531442, 21.20230865631969, 137.80090736626855]
+Guessed row converting nan to 0:  [-0.05909017  0.6781584   0.06100764  0.14097192  0.53870417  1.
+ -0.22402688 -0.61254509  0.3833972   0.65377356]
+
+
+-------------------------
+On component 7 with indexs [57, 14, 31]
+Guessed row:  [ 1.          0.39908399 -0.92646227  1.07115114 -0.64803125  1.99235917
+  0.23549384  1.21440121 -1.63822528  1.43465871]
+The guessed error in the computation is 9.414152136705267e-06 with 3 witnesses
+Normalize on axis 0
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-23.114553656073014, 14.006531539426934, 14.089580164265517]
+Guessed row converting nan to 0:  [ 1.          0.39908399 -0.92646227  1.07115114 -0.64803125  1.99235917
+  0.23549384  1.21440121 -1.63822528  1.43465871]
+
+
+-------------------------
+On component 8 with indexs [25, 20, 53]
+Guessed row:  [ 1.          0.3723992   0.79943381 -0.40868153 -0.35738595  0.30081238
+  0.22960007 -0.11286943  0.65828059  0.46616795]
+The guessed error in the computation is 0.00013517296902665343 with 3 witnesses
+Normalize on axis 0
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [52.932387323579405, 41.08286442510493, 159.33480766175526]
+Guessed row converting nan to 0:  [ 1.          0.3723992   0.79943381 -0.40868153 -0.35738595  0.30081238
+  0.22960007 -0.11286943  0.65828059  0.46616795]
+
+
+-------------------------
+On component 9 with indexs [36, 23]
+Guessed row:  [ 0.40951451  0.73026413  0.26692933  0.18744164  0.18211925  0.82846995
+ -0.1393132   1.08344931 -0.13545876  1.        ]
+The guessed error in the computation is 3.1455949234260316e-09 with 2 witnesses
+Normalize on axis 9
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-4.277468289387748, 165.69912596208738]
+Guessed row converting nan to 0:  [ 0.40951451  0.73026413  0.26692933  0.18744164  0.18211925  0.82846995
+ -0.1393132   1.08344931 -0.13545876  1.        ]
+Don't add it to the set
+-------------------------
+All irrelevant indices:  []
+len(all_ratios):  60
+len(resulting_rows):  9
+We have not explored all neurons. Do more random search
+Length of resulting_rows 9
+The number of skips_because_of_nan 0
+The expected_neurons are 10
+Failure reason:  None
+Branch 1
+*********************************
+Graph solving failed; get more points
+AcceptableFailure
+e.irr_idx []
+e.partial_solution 9
+*********************************
+Got partial solution with shape (9, 10)
+hidden (3, 10)
+hidden (3, 10)
+hidden (3, 10)
+hidden (3, 10)
+hidden (3, 10)
+hidden (3, 10)
+hidden (3, 10)
+hidden (3, 10)
+hidden (3, 10)
+At this iteration I have 60 critical points
+Gathering 10 critical points
+Trying to get ratios for point 117.83058148278583
+Trying to get ratios for point 107.69810676261694
+Up to 1 of 10
+Trying to get ratios for point 84.302583593688
+Up to 2 of 10
+Trying to get ratios for point 33.05981829890601
+Up to 3 of 10
+Trying to get ratios for point -29.822494581335036
+Trying to get ratios for point -39.27748983444286
+Up to 4 of 10
+Trying to get ratios for point -49.75721965269334
+Up to 5 of 10
+Trying to get ratios for point -53.90694149587725
+Up to 6 of 10
+Trying to get ratios for point -55.78355901708109
+Up to 7 of 10
+Trying to get ratios for point -55.951183584683136
+Up to 8 of 10
+Trying to get ratios for point -56.924155934034495
+Up to 9 of 10
+Trying to get ratios for point -69.15536079813343
+Up to 10 of 10
+And now up to  70 critical points
+CP  0 is a critical point of layer 1 Neuron 2
+CP  1 is a critical point of layer 1 Neuron 6
+CP  2 is a critical point of layer 1 Neuron 5
+CP  3 is a critical point of layer 1 Neuron 10
+CP  4 is a critical point of layer 2 Neuron 10
+CP  5 is a critical point of layer 2 Neuron 3
+CP  6 is a critical point of layer 2 Neuron 4
+CP  7 is a critical point of layer 2 Neuron 5
+CP  8 is a critical point of layer 2 Neuron 1
+CP  9 is a critical point of layer 1 Neuron 4
+CP  10 is a critical point of layer 1 Neuron 3
+CP  11 is a critical point of layer 2 Neuron 6
+CP  12 is a critical point of layer 2 Neuron 10
+CP  13 is a critical point of layer 1 Neuron 9
+CP  14 is a critical point of layer 1 Neuron 1
+CP  15 is a critical point of layer 2 Neuron 6
+CP  16 is a critical point of layer 2 Neuron 1
+CP  17 is a critical point of layer 2 Neuron 10
+CP  18 is a critical point of layer 2 Neuron 2
+CP  19 is a critical point of layer 2 Neuron 3
+CP  20 is a critical point of layer 1 Neuron 7
+CP  21 is a critical point of layer 2 Neuron 8
+CP  22 is a critical point of layer 2 Neuron 7
+CP  23 is a critical point of layer 1 Neuron 8
+CP  24 is a critical point of layer 1 Neuron 6
+CP  25 is a critical point of layer 1 Neuron 7
+CP  26 is a critical point of layer 1 Neuron 2
+CP  27 is a critical point of layer 2 Neuron 2
+CP  28 is a critical point of layer 2 Neuron 7
+CP  29 is a critical point of layer 2 Neuron 1
+CP  30 is a critical point of layer 1 Neuron 9
+CP  31 is a critical point of layer 1 Neuron 1
+CP  32 is a critical point of layer 1 Neuron 3
+CP  33 is a critical point of layer 2 Neuron 5
+CP  34 is a critical point of layer 1 Neuron 5
+CP  35 is a critical point of layer 1 Neuron 4
+CP  36 is a critical point of layer 1 Neuron 8
+CP  37 is a critical point of layer 2 Neuron 3
+CP  38 is a critical point of layer 1 Neuron 10
+CP  39 is a critical point of layer 2 Neuron 8
+CP  40 is a critical point of layer 2 Neuron 1
+CP  41 is a critical point of layer 2 Neuron 3
+CP  42 is a critical point of layer 2 Neuron 7
+CP  43 is a critical point of layer 1 Neuron 4
+CP  44 is a critical point of layer 1 Neuron 6
+CP  45 is a critical point of layer 2 Neuron 6
+CP  46 is a critical point of layer 2 Neuron 5
+CP  47 is a critical point of layer 2 Neuron 9
+CP  48 is a critical point of layer 1 Neuron 10
+CP  49 is a critical point of layer 2 Neuron 7
+CP  50 is a critical point of layer 2 Neuron 2
+CP  51 is a critical point of layer 2 Neuron 8
+CP  52 is a critical point of layer 1 Neuron 3
+CP  53 is a critical point of layer 1 Neuron 7
+CP  54 is a critical point of layer 1 Neuron 2
+CP  55 is a critical point of layer 1 Neuron 9
+CP  56 is a critical point of layer 2 Neuron 6
+CP  57 is a critical point of layer 1 Neuron 1
+CP  58 is a critical point of layer 1 Neuron 5
+CP  59 is a critical point of layer 2 Neuron 5
+CP  60 is a critical point of layer 2 Neuron 6
+CP  61 is a critical point of layer 1 Neuron 8
+CP  62 is a critical point of layer 1 Neuron 6
+CP  63 is a critical point of layer 2 Neuron 8
+CP  64 is a critical point of layer 1 Neuron 2
+CP  65 is a critical point of layer 2 Neuron 2
+CP  66 is a critical point of layer 2 Neuron 7
+CP  67 is a critical point of layer 2 Neuron 3
+CP  68 is a critical point of layer 2 Neuron 10
+CP  69 is a critical point of layer 2 Neuron 9
+After filtering duplicates we're down to  70 critical points
+Start trying to do the graph solving
+Length criticals group, all ratios group:  70 70
+Block multiply factor:  2
+Go up to 1
+batch_index: 0
+Sorted components:  [{0, 26, 64, 54}, {24, 1, 44, 62}, {2, 34, 58}, {48, 3, 38}, {9, 35, 43}, {32, 10, 52}, {13, 30, 55}, {57, 14, 31}, {25, 20, 53}, {36, 61, 23}]
+Graph search found 10 different components with the following counts [4, 4, 3, 3, 3, 3, 3, 3, 3, 3]
+Previous number of components inf
+candidate_components [{0, 26, 64, 54}, {24, 1, 44, 62}, {2, 34, 58}, {48, 3, 38}, {9, 35, 43}, {32, 10, 52}, {13, 30, 55}, {57, 14, 31}, {25, 20, 53}, {36, 61, 23}]
+Length of candidate rows 10
+After re-doing the graph, the component counts is 10 with items [4, 4, 3, 3, 3, 3, 3, 3, 3, 3]
+Processing each connected component in turn.
+On component 0 with indexs [0, 26, 64, 54]
+On component 1 with indexs [24, 1, 44, 62]
+On component 2 with indexs [2, 34, 58]
+On component 3 with indexs [48, 3, 38]
+On component 4 with indexs [9, 35, 43]
+On component 5 with indexs [32, 10, 52]
+On component 6 with indexs [13, 30, 55]
+On component 7 with indexs [57, 14, 31]
+On component 8 with indexs [25, 20, 53]
+On component 9 with indexs [36, 61, 23]
+
+
+-------------------------
+On component 0 with indexs [0, 26, 64, 54]
+Guessed row:  [ 1.         -1.11400619  0.80535502 -0.87786061 -0.3268144  -0.39633314
+  0.20150876 -0.83048669 -1.03935149  0.85339761]
+The guessed error in the computation is 0.00010977395778480337 with 4 witnesses
+Normalize on axis 0
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-1047.1504065812262, 44.21126745457484, -49.75721965269334, 144.12309844988968]
+Guessed row converting nan to 0:  [ 1.         -1.11400619  0.80535502 -0.87786061 -0.3268144  -0.39633314
+  0.20150876 -0.83048669 -1.03935149  0.85339761]
+
+
+-------------------------
+On component 1 with indexs [24, 1, 44, 62]
+Guessed row:  [-0.18841765 -0.71522309 -0.36276767  1.         -0.36679581 -0.38076503
+  0.80687575  0.06156104  0.61258381 -0.2974217 ]
+The guessed error in the computation is 2.3508370780911392e-05 with 4 witnesses
+Normalize on axis 3
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [86.52006089770921, -927.7509401525754, 190.3489990099192, 33.05981829890601]
+Guessed row converting nan to 0:  [-0.18841765 -0.71522309 -0.36276767  1.         -0.36679581 -0.38076503
+  0.80687575  0.06156104  0.61258381 -0.2974217 ]
+
+
+-------------------------
+On component 2 with indexs [2, 34, 58]
+Guessed row:  [ 33.93615679  24.26258445  49.56366001 -26.78921164  40.81165657
+  57.52368705 -33.36688758  97.01160256   1.         -41.22736026]
+The guessed error in the computation is 0.0002682861929033109 with 3 witnesses
+Normalize on axis 8
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-428.27697375599064, 5.112193654251374, 222.93190442823538]
+Guessed row converting nan to 0:  [ 33.93615679  24.26258445  49.56366001 -26.78921164  40.81165657
+  57.52368705 -33.36688758  97.01160256   1.         -41.22736026]
+
+
+-------------------------
+On component 3 with indexs [48, 3, 38]
+Guessed row:  [ 1.03097608  0.41291783  1.75378043 -0.65596285 -0.68797444  0.22765275
+  0.54140579  1.          1.29825977  1.06893281]
+The guessed error in the computation is 5.798302337806094e-05 with 3 witnesses
+Normalize on axis 7
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [178.08051535588817, -58.16358044804977, -48.01591610746205]
+Guessed row converting nan to 0:  [ 1.03097608  0.41291783  1.75378043 -0.65596285 -0.68797444  0.22765275
+  0.54140579  1.          1.29825977  1.06893281]
+
+
+-------------------------
+On component 4 with indexs [9, 35, 43]
+Guessed row:  [-1.04649779  1.56129052  0.44687464  1.          0.44466743 -0.55285415
+ -0.78062933  0.26334851 -0.45225216  0.61464533]
+The guessed error in the computation is 1.0214289419080425e-05 with 3 witnesses
+Normalize on axis 3
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-23.37993395265785, 2.499538631351191, 202.29510333448724]
+Guessed row converting nan to 0:  [-1.04649779  1.56129052  0.44687464  1.          0.44466743 -0.55285415
+ -0.78062933  0.26334851 -0.45225216  0.61464533]
+
+
+-------------------------
+On component 5 with indexs [32, 10, 52]
+Guessed row:  [ 0.43511266  0.20839014 -0.19018159 -0.78010757  1.          0.68361517
+  0.97414673 -0.29327575  0.49527484  0.54190006]
+The guessed error in the computation is 4.745420403479139e-05 with 3 witnesses
+Normalize on axis 4
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [9.632137246112816, -4.358436568129724, 162.60777973119747]
+Guessed row converting nan to 0:  [ 0.43511266  0.20839014 -0.19018159 -0.78010757  1.          0.68361517
+  0.97414673 -0.29327575  0.49527484  0.54190006]
+
+
+-------------------------
+On component 6 with indexs [13, 30, 55]
+Guessed row:  [-0.05909017  0.6781584   0.06100764  0.14097192  0.53870417  1.
+ -0.22402688 -0.61254509  0.3833972   0.65377356]
+The guessed error in the computation is 5.090259822454479e-05 with 3 witnesses
+Normalize on axis 5
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [5.443659033531442, 21.20230865631969, 137.80090736626855]
+Guessed row converting nan to 0:  [-0.05909017  0.6781584   0.06100764  0.14097192  0.53870417  1.
+ -0.22402688 -0.61254509  0.3833972   0.65377356]
+
+
+-------------------------
+On component 7 with indexs [57, 14, 31]
+Guessed row:  [ 1.          0.39908399 -0.92646227  1.07115114 -0.64803125  1.99235917
+  0.23549384  1.21440121 -1.63822528  1.43465871]
+The guessed error in the computation is 9.414152136705267e-06 with 3 witnesses
+Normalize on axis 0
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-23.114553656073014, 14.006531539426934, 14.089580164265517]
+Guessed row converting nan to 0:  [ 1.          0.39908399 -0.92646227  1.07115114 -0.64803125  1.99235917
+  0.23549384  1.21440121 -1.63822528  1.43465871]
+
+
+-------------------------
+On component 8 with indexs [25, 20, 53]
+Guessed row:  [ 1.          0.3723992   0.79943381 -0.40868153 -0.35738595  0.30081238
+  0.22960007 -0.11286943  0.65828059  0.46616795]
+The guessed error in the computation is 0.00013517296902665343 with 3 witnesses
+Normalize on axis 0
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [52.932387323579405, 41.08286442510493, 159.33480766175526]
+Guessed row converting nan to 0:  [ 1.          0.3723992   0.79943381 -0.40868153 -0.35738595  0.30081238
+  0.22960007 -0.11286943  0.65828059  0.46616795]
+
+
+-------------------------
+On component 9 with indexs [36, 61, 23]
+Guessed row:  [-3.0231686  -5.39101252 -1.97054479 -1.3837519  -1.34447306 -6.11603407
+  1.02847492 -7.99834144  1.         -7.38234051]
+The guessed error in the computation is 0.0004321315727877917 with 3 witnesses
+Normalize on axis 8
+Fully recovered neuron
+We are very sure about this neuron, so we save all critical points now and throw out all critical points that are found subsequently.
+Added new fixed neuron:  [-4.277468289387748, 84.302583593688, 165.69912596208738]
+Guessed row converting nan to 0:  [-3.0231686  -5.39101252 -1.97054479 -1.3837519  -1.34447306 -6.11603407
+  1.02847492 -7.99834144  1.         -7.38234051]
+-------------------------
+All irrelevant indices:  []
+len(all_ratios):  70
+len(resulting_rows):  10
+At this point, we just assume the remaining neurons must be dead
+The result rows are:
+[array([ 1.        , -1.11400619,  0.80535502, -0.87786061, -0.3268144 ,
+       -0.39633314,  0.20150876, -0.83048669, -1.03935149,  0.85339761]), array([-0.18841765, -0.71522309, -0.36276767,  1.        , -0.36679581,
+       -0.38076503,  0.80687575,  0.06156104,  0.61258381, -0.2974217 ]), array([ 33.93615679,  24.26258445,  49.56366001, -26.78921164,
+        40.81165657,  57.52368705, -33.36688758,  97.01160256,
+         1.        , -41.22736026]), array([ 1.03097608,  0.41291783,  1.75378043, -0.65596285, -0.68797444,
+        0.22765275,  0.54140579,  1.        ,  1.29825977,  1.06893281]), array([-1.04649779,  1.56129052,  0.44687464,  1.        ,  0.44466743,
+       -0.55285415, -0.78062933,  0.26334851, -0.45225216,  0.61464533]), array([ 0.43511266,  0.20839014, -0.19018159, -0.78010757,  1.        ,
+        0.68361517,  0.97414673, -0.29327575,  0.49527484,  0.54190006]), array([-0.05909017,  0.6781584 ,  0.06100764,  0.14097192,  0.53870417,
+        1.        , -0.22402688, -0.61254509,  0.3833972 ,  0.65377356]), array([ 1.        ,  0.39908399, -0.92646227,  1.07115114, -0.64803125,
+        1.99235917,  0.23549384,  1.21440121, -1.63822528,  1.43465871]), array([ 1.        ,  0.3723992 ,  0.79943381, -0.40868153, -0.35738595,
+        0.30081238,  0.22960007, -0.11286943,  0.65828059,  0.46616795]), array([-3.0231686 , -5.39101252, -1.97054479, -1.3837519 , -1.34447306,
+       -6.11603407,  1.02847492, -7.99834144,  1.        , -7.38234051])]
+Successfully returning a solution attempt.
+
+Branch 5
+while loop time 0.8879001140594482
+Number of critical points per cluster [4, 4, 3, 3, 3, 3, 3, 3, 3, 3]
+Extracted normal:  WARNING:root:The last layer has to have a linear activation function, instead found <function sigmoid at 0x703329a844c0>. We will replace this output function with a linear one automatically in your model.
+INFO:root:
+        Determined the following model parameters: 
+            input shape: 	 (10,)
+            hiddenLayerIDs: 	 [1, 2]
+            neuronsHiddenLayers: 	 [10, 10]
+            outputs: 	 1
+        
+INFO:root:Signs will be recovered for neuronIDs: 
+	 [0 1 2 3 4 5 6 7 8 9].
+[[ 1.00000000e+00 -1.88417648e-01  3.39361568e+01  1.03097608e+00
+  -1.04649779e+00  4.35112656e-01 -5.90901736e-02  1.00000000e+00
+   1.00000000e+00 -3.02316860e+00]
+ [-1.11400619e+00 -7.15223086e-01  2.42625844e+01  4.12917835e-01
+   1.56129052e+00  2.08390143e-01  6.78158401e-01  3.99083991e-01
+   3.72399200e-01 -5.39101252e+00]
+ [ 8.05355018e-01 -3.62767667e-01  4.95636600e+01  1.75378043e+00
+   4.46874642e-01 -1.90181588e-01  6.10076371e-02 -9.26462268e-01
+   7.99433811e-01 -1.97054479e+00]
+ [-8.77860613e-01  1.00000000e+00 -2.67892116e+01 -6.55962854e-01
+   1.00000000e+00 -7.80107575e-01  1.40971917e-01  1.07115114e+00
+  -4.08681530e-01 -1.38375190e+00]
+ [-3.26814402e-01 -3.66795811e-01  4.08116566e+01 -6.87974445e-01
+   4.44667434e-01  1.00000000e+00  5.38704174e-01 -6.48031246e-01
+  -3.57385953e-01 -1.34447306e+00]
+ [-3.96333137e-01 -3.80765027e-01  5.75236870e+01  2.27652752e-01
+  -5.52854145e-01  6.83615167e-01  1.00000000e+00  1.99235917e+00
+   3.00812384e-01 -6.11603407e+00]
+ [ 2.01508755e-01  8.06875754e-01 -3.33668876e+01  5.41405786e-01
+  -7.80629330e-01  9.74146732e-01 -2.24026882e-01  2.35493841e-01
+   2.29600074e-01  1.02847492e+00]
+ [-8.30486690e-01  6.15610370e-02  9.70116026e+01  1.00000000e+00
+   2.63348506e-01 -2.93275746e-01 -6.12545085e-01  1.21440121e+00
+  -1.12869425e-01 -7.99834144e+00]
+ [-1.03935149e+00  6.12583811e-01  1.00000000e+00  1.29825977e+00
+  -4.52252162e-01  4.95274836e-01  3.83397202e-01 -1.63822528e+00
+   6.58280586e-01  1.00000000e+00]
+ [ 8.53397607e-01 -2.97421701e-01 -4.12273603e+01  1.06893281e+00
+   6.14645328e-01  5.41900060e-01  6.53773556e-01  1.43465871e+00
+   4.66167950e-01 -7.38234051e+00]]
+Extracted normals shape:  (10, 10)
+Extracted bias:  [[ 0.12614055]
+ [ 0.13228833]
+ [-4.60164969]
+ [-0.29971087]
+ [ 0.0260493 ]
+ [ 0.17924782]
+ [ 0.09170735]
+ [-0.18365449]
+ [-0.07494412]
+ [-1.68840243]]
+Query count:  7427
+Average time for critical point search and query count:  0.036252737045288086 0.36252737045288086 46 742
+Average time for signature recovery:  0.0888329029083252 0.888329029083252
+Average time for precision improvement:  2.384185791015625e-08 2.384185791015625e-07
+query count: 462 7427
+critical point search and partial weights:  0.36252737045288086
+Match partial:  0.44838428497314453
+partial biases: 0.0004057884216308594
+dead weights:  0.0
+signature recovery:  0.888329029083252
+precision improvement:  2.384185791015625e-07
+overall time:  0.888329267501831
+Overall Time taken for signature extraction:  0.888357400894165
+
+Check the solution of the last weight matrix.
+Neuron 0 maps on to neuron 1 with error 2.954760004583655e-06 ratio -0.4074175348778844
+Bias check [0.00451497]
+Neuron 1 maps on to neuron 5 with error 5.997295320290492e-07 ratio -0.4975828968018431
+Bias check [0.0001214]
+Neuron 2 maps on to neuron 4 with error 3.1770830799422735e-06 ratio 0.00643094544459262
+Bias check [-0.0018466]
+Neuron 3 maps on to neuron 9 with error 8.17913649753273e-07 ratio 0.2465601942532588
+Bias check [-4.11605048e-05]
+Neuron 4 maps on to neuron 3 with error 1.9208666319671645e-07 ratio 0.3708148768884981
+Bias check [-1.34434152e-05]
+Neuron 5 maps on to neuron 2 with error 7.101309589128529e-07 ratio -0.5102001990186966
+Bias check [-6.31722804e-05]
+Neuron 6 maps on to neuron 8 with error 2.805970332859738e-07 ratio -0.5072897816397388
+Bias check [2.03370148e-05]
+Neuron 7 maps on to neuron 0 with error 1.2643427444423931e-07 ratio 0.2720858130116626
+Bias check [-7.60128699e-05]
+Neuron 8 maps on to neuron 6 with error 1.9003327007099335e-06 ratio 0.538798289617906
+Bias check [4.31557123e-05]
+Neuron 9 maps on to neuron 7 with error 6.762421094655402e-06 ratio 0.055853572076117325
+Bias check [0.00039988]
+Real:  [array([[ 0.27208581, -0.40741732, -0.22199434, -0.38805696,  0.21824067,
+         0.0937535 ,  0.53879881, -0.16885442,  0.0299758 ,  0.2541977 ],
+       [ 0.108585  ,  0.45386606, -0.10632049,  0.57894965,  0.15603274,
+         0.35588274,  0.2006476 , -0.30111057, -0.34402283,  0.10180894],
+       [-0.25207725, -0.32811681,  0.09703062,  0.16570766,  0.3187415 ,
+         0.180507  ,  0.43073396, -0.11006236, -0.03094841,  0.4324124 ],
+       [ 0.29144505,  0.35765534,  0.39801148,  0.37081486, -0.17227986,
+        -0.49758278, -0.22019699, -0.07728771, -0.07151356, -0.16173392],
+       [-0.17632012,  0.13314999, -0.51020017,  0.16488927,  0.26245771,
+         0.18251129, -0.19255887, -0.07509216, -0.27327912, -0.16962699],
+       [ 0.5420926 ,  0.16147318, -0.34878107, -0.20500658,  0.3699319 ,
+         0.18946209,  0.16207601, -0.34160222, -0.5072898 ,  0.05613045],
+       [ 0.06407451, -0.08209708, -0.49700988, -0.28946902, -0.21458019,
+        -0.40148795,  0.12370784,  0.05744312,  0.11364669,  0.13348899],
+       [ 0.33042137,  0.33835473,  0.14962941,  0.09765356,  0.62387788,
+        -0.0306319 , -0.06081392, -0.44673983,  0.31073792,  0.24656022],
+       [-0.44573786,  0.42344747, -0.25268928, -0.16770187,  0.00643071,
+        -0.30481097,  0.35468098,  0.05585329, -0.19449353,  0.32009922],
+       [ 0.39035023, -0.34768926, -0.27647755,  0.22791957, -0.26512899,
+         0.147992  ,  0.25116973, -0.41233025, -0.33165258,  0.26355647]]), array([-0.05004579, -0.0468769 , -0.09151545,  0.00964602, -0.03143956,
+       -0.06570301, -0.04033661, -0.09390343, -0.04650186, -0.07393793])]
+Corrected:  [[ 0.27208581  0.40741753  0.22199456 -0.38805695  0.21824157 -0.0937534
+   0.53879829 -0.16885477 -0.02997584  0.25419766]
+ [ 0.10858509 -0.45386566  0.10632069  0.57894975  0.15603136 -0.35588277
+   0.20064805 -0.30110731  0.34402283  0.1018091 ]
+ [-0.25207724  0.32811576 -0.09703068  0.16570777  0.31874119 -0.18050699
+   0.43073357 -0.11006197  0.03094855  0.43241244]
+ [ 0.29144503 -0.35765581 -0.39801104  0.37081488 -0.17227996  0.4975829
+  -0.22019691 -0.07728749  0.07151361 -0.16173433]
+ [-0.17632011 -0.13314992  0.5102002   0.1648893   0.26245754 -0.18251132
+  -0.19255894 -0.07509362  0.27327912 -0.16962711]
+ [ 0.54209266 -0.16147307  0.34878059 -0.20500654  0.36993169 -0.18946216
+   0.1620772  -0.34160235  0.50728978  0.05613011]
+ [ 0.06407453  0.0820982   0.49700986 -0.28946897 -0.21458063  0.40148757
+   0.12370813  0.057444   -0.11364655  0.13348912]
+ [ 0.33042134 -0.33835484 -0.14962934  0.09765354  0.62387632  0.03063172
+  -0.06081385 -0.44673594 -0.31073786  0.24656019]
+ [-0.44573786 -0.42345002  0.25268932 -0.16770183  0.00643095  0.30481123
+   0.35468045  0.05585357  0.19449348  0.32009918]
+ [ 0.39035028  0.34768915  0.27647752  0.22791963 -0.2651309  -0.14799195
+   0.25117049 -0.41233009  0.33165264  0.26355628]] [[-0.04996978]
+ [ 0.05139187]
+ [ 0.09145228]
+ [ 0.00965947]
+ [-0.02959296]
+ [ 0.06582441]
+ [-0.04037976]
+ [-0.09430331]
+ [ 0.0465222 ]
+ [-0.07389677]]
+Original Neuron 0 maps on to recovered neuron 7
+absolute values of weights are close enough
+Original Neuron 1 maps on to recovered neuron 0
+ERROR LAYER EXTRACTED INCORRECTLY
+Original Neuron 2 maps on to recovered neuron 5
+absolute values of weights are close enough
+Original Neuron 3 maps on to recovered neuron 4
+absolute values of weights are close enough
+Original Neuron 4 maps on to recovered neuron 2
+absolute values of weights are close enough
+Original Neuron 5 maps on to recovered neuron 1
+absolute values of weights are close enough
+Original Neuron 6 maps on to recovered neuron 8
+absolute values of weights are close enough
+Original Neuron 7 maps on to recovered neuron 9
+absolute values of weights are close enough
+Original Neuron 8 maps on to recovered neuron 6
+absolute values of weights are close enough
+Original Neuron 9 maps on to recovered neuron 3
+absolute values of weights are close enough
+Weights, biases same up to sign in float32 precision?:  False False
+Weights, biases same up to sign in float16 precision?: True False
+Signature Extraction to float32 standards.
+Sign Extraction Quantized to float32.
+Neuron:  0
+Equal weights and biases:  True True
+absolute values of weights are close enough
+Neuron:  1
+Equal weights and biases:  False False
+absolute values of weights are close enough
+Right weights: [-0.40741732  0.45386606 -0.32811681  0.35765534  0.13314999  0.16147318
+ -0.08209708  0.33835473  0.42344747 -0.34768926]
+Extracted weights: [ 0.40741754 -0.45386565  0.32811576 -0.3576558  -0.13314992 -0.16147307
+  0.0820982  -0.33835483 -0.42345002  0.34768915]
+Neuron:  2
+Equal weights and biases:  False False
+absolute values of weights are close enough
+Right weights: [-0.22199434 -0.10632049  0.09703062  0.39801148 -0.51020017 -0.34878107
+ -0.49700988  0.14962941 -0.25268928 -0.27647755]
+Extracted weights: [ 0.22199456  0.10632069 -0.09703068 -0.39801103  0.5102002   0.3487806
+  0.49700984 -0.14962934  0.25268933  0.27647752]
+Neuron:  3
+Equal weights and biases:  False False
+absolute values of weights are close enough
+Right weights: [-0.38805696  0.57894965  0.16570766  0.37081486  0.16488927 -0.20500658
+ -0.28946902  0.09765356 -0.16770187  0.22791957]
+Extracted weights: [ 0.38805696 -0.57894975 -0.16570777 -0.3708149  -0.1648893   0.20500654
+  0.28946897 -0.09765355  0.16770183 -0.22791964]
+Neuron:  4
+Equal weights and biases:  True True
+absolute values of weights are close enough
+Neuron:  5
+Equal weights and biases:  True True
+absolute values of weights are close enough
+Neuron:  6
+Equal weights and biases:  True True
+absolute values of weights are close enough
+Neuron:  7
+Equal weights and biases:  False False
+absolute values of weights are close enough
+Right weights: [-0.16885442 -0.30111057 -0.11006236 -0.07728771 -0.07509216 -0.34160222
+  0.05744312 -0.44673983  0.05585329 -0.41233025]
+Extracted weights: [ 0.16885476  0.30110732  0.11006197  0.07728749  0.07509362  0.34160236
+ -0.057444    0.44673595 -0.05585357  0.4123301 ]
+Neuron:  8
+Equal weights and biases:  True True
+absolute values of weights are close enough
+Neuron:  9
+Equal weights and biases:  True True
+absolute values of weights are close enough
+Different indices:  [1, 2, 3, 7]

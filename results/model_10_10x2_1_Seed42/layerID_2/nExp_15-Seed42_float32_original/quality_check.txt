@@ -1,0 +1,42 @@
+
+Check the solution of the last weight matrix.
+Neuron 0 maps on to neuron 1 with error 1.7827053460942596e-05 ratio -0.001964602236908343
+Bias check [4.66179328e-05]
+Neuron 1 maps on to neuron 4 with error 2.8825726490911394e-07 ratio 0.32362264616089925
+Bias check [-1.35929252e-06]
+Neuron 2 maps on to neuron 3 with error 8.159669310124046e-08 ratio 0.37136966980094455
+Bias check [4.38965035e-06]
+Neuron 3 maps on to neuron 5 with error 1.0820624431001153e-06 ratio -0.4833061845373705
+Bias check [-0.00019528]
+Neuron 4 maps on to neuron 6 with error 7.269163412630207e-08 ratio -0.47409227768835405
+Bias check [2.13562108e-06]
+Neuron 5 maps on to neuron 9 with error 4.18507050728625e-08 ratio -0.04642117347001935
+Bias check [-9.72788195e-07]
+Neuron 6 maps on to neuron 2 with error 1.1850005715457822e-07 ratio -0.3816833665073943
+Bias check [-1.16899384e-06]
+Neuron 7 maps on to neuron 7 with error 1.0761082295131293e-07 ratio -0.582273415130609
+Bias check [-2.9592232e-06]
+Neuron 8 maps on to neuron 8 with error 4.0173913605595276e-07 ratio 0.3376103509908489
+Bias check [2.73533943e-05]
+Neuron 9 maps on to neuron 0 with error 4.0956682901412216e-08 ratio 0.39683712074192545
+Bias check [-1.97000197e-06]
+Original Neuron 0 maps on to recovered neuron 9
+absolute values of weights are close enough
+Original Neuron 1 maps on to recovered neuron 0
+absolute values of weights are close enough
+Original Neuron 2 maps on to recovered neuron 6
+absolute values of weights are close enough
+Original Neuron 3 maps on to recovered neuron 2
+absolute values of weights are close enough
+Original Neuron 4 maps on to recovered neuron 1
+absolute values of weights are close enough
+Original Neuron 5 maps on to recovered neuron 3
+absolute values of weights are close enough
+Original Neuron 6 maps on to recovered neuron 4
+absolute values of weights are close enough
+Original Neuron 7 maps on to recovered neuron 7
+absolute values of weights are close enough
+Original Neuron 8 maps on to recovered neuron 8
+absolute values of weights are close enough
+Original Neuron 9 maps on to recovered neuron 5
+absolute values of weights are close enough

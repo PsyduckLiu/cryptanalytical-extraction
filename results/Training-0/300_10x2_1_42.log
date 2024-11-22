@@ -1,0 +1,162 @@
+2024-11-20 20:02:30.218952: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-11-20 20:02:30.238185: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2024-11-20 20:02:30.238213: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2024-11-20 20:02:30.238908: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-11-20 20:02:30.241903: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-11-20 20:02:30.559165: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+INFO:root:
+    # ---------------------------------------------------
+    # Starting extracting weights and biases.
+    # ---------------------------------------------------   
+    
+INFO:root:Parsed arguments for signature and sign recovery: 
+	 Namespace(model='models/300_10x2_1_Seed0.keras', layerID=1, tgtNeurons=None, dataset=None, eps=8, quantized=2, onlySign=False, signRecoveryMethod='neuronWiggle', seed=42, setting='original', nExp=15).
+2024-11-20 20:02:31.129880: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:901] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-11-20 20:02:31.148172: W tensorflow/core/common_runtime/gpu/gpu_device.cc:2256] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+INFO:root:Model summary:
+Model: "model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input_layer (InputLayer)    [(None, 300)]             0         
+                                                                 
+ layer0 (Dense)              (None, 10)                3010      
+                                                                 
+ layer1 (Dense)              (None, 10)                110       
+                                                                 
+ output (Dense)              (None, 1)                 11        
+                                                                 
+=================================================================
+Total params: 3131 (24.46 KB)
+Trainable params: 3131 (24.46 KB)
+Non-trainable params: 0 (0.00 Byte)
+_________________________________________________________________
+INFO:root:None
+INFO:root:Signature and Sign recovery results will be saved to 
+	 results/model_300_10x2_1_Seed0/layerID_1/nExp_15-Seed42_float32_original/df.md
+INFO:root:Recovering signatures...
+WARNING:root:The last layer has to have a linear activation function, instead found <function sigmoid at 0x77c181d984c0>. We will replace this output function with a linear one automatically in your model.
+INFO:root:
+        Determined the following model parameters: 
+            input shape: 	 (300,)
+            hiddenLayerIDs: 	 [1, 2]
+            neuronsHiddenLayers: 	 [10, 10]
+            outputs: 	 1
+        
+INFO:root:Signs will be recovered for neuronIDs: 
+	 [0 1 2 3 4 5 6 7 8 9].
+Start another sweep
+Total intersections found 19
+Start another sweep
+Total intersections found 18
+Branch 1
+Start another sweep
+Total intersections found 20
+Branch 1
+Branch 1
+Start another sweep
+Total intersections found 20
+Branch 1
+Branch 1
+Start another sweep
+Total intersections found 16
+Branch 1
+Branch 1
+Start another sweep
+Total intersections found 21
+Branch 1
+Branch 1
+Start another sweep
+Total intersections found 17
+Branch 1
+Branch 5
+while loop time 41.72188067436218
+Query count:  315315
+query count: 847 315315
+critical point search and partial weights:  7.142483949661255
+Match partial:  34.4276602268219
+partial biases: 0.0008327960968017578
+dead weights:  0.0
+signature recovery:  41.72207951545715
+precision improvement:  2.384185791015625e-07
+overall time:  41.72207975387573
+Overall Time taken for signature extraction:  41.722108602523804
+
+Check the solution of the last weight matrix.
+Neuron 0 maps on to neuron 4 with error 4.054474176761894e-06 ratio 0.16220058751425093
+Bias check [0.07375833]
+Neuron 1 maps on to neuron 8 with error 2.3031331284855823e-06 ratio -0.13839015003403637
+Bias check [-0.00013758]
+Neuron 2 maps on to neuron 2 with error 2.0939373261766835e-06 ratio -0.15571252010462805
+Bias check [0.00010383]
+Neuron 3 maps on to neuron 3 with error 9.059114097868548e-07 ratio -0.13798254799442358
+Bias check [-0.00023032]
+Neuron 4 maps on to neuron 5 with error 5.411927312831333e-06 ratio 0.12032490368364668
+Bias check [0.00020102]
+Neuron 5 maps on to neuron 7 with error 1.9847134928556397e-06 ratio -0.07529042423603786
+Bias check [-0.00023398]
+Neuron 6 maps on to neuron 0 with error 9.807535419559132e-06 ratio 0.005902046849408437
+Bias check [-0.00030302]
+Neuron 7 maps on to neuron 9 with error 1.6169407272319117e-06 ratio 0.11380968611311698
+Bias check [0.00040943]
+Neuron 8 maps on to neuron 1 with error 1.017045232443242e-05 ratio -0.14441167982382097
+Bias check [0.00031646]
+Neuron 9 maps on to neuron 6 with error 1.1326709401808648e-05 ratio -0.11487400920660457
+Bias check [-1.58438483e-07]
+Original Neuron 0 maps on to recovered neuron 6
+absolute values of weights are close enough
+Original Neuron 1 maps on to recovered neuron 8
+ERROR LAYER EXTRACTED INCORRECTLY
+Original Neuron 2 maps on to recovered neuron 2
+absolute values of weights are close enough
+Original Neuron 3 maps on to recovered neuron 3
+absolute values of weights are close enough
+Original Neuron 4 maps on to recovered neuron 0
+ERROR LAYER EXTRACTED INCORRECTLY
+Original Neuron 5 maps on to recovered neuron 4
+absolute values of weights are close enough
+Original Neuron 6 maps on to recovered neuron 9
+absolute values of weights are close enough
+Original Neuron 7 maps on to recovered neuron 5
+absolute values of weights are close enough
+Original Neuron 8 maps on to recovered neuron 1
+absolute values of weights are close enough
+Original Neuron 9 maps on to recovered neuron 7
+absolute values of weights are close enough
+Weights, biases same up to sign in float32 precision?:  False False
+Weights, biases same up to sign in float16 precision?: False False
+Signature Extraction to float32 standards.
+Sign Extraction Quantized to float32.
+Neuron:  0
+Equal weights and biases:  False False
+absolute values of weights are close enough
+Neuron:  1
+Equal weights and biases:  True True
+absolute values of weights are close enough
+Neuron:  2
+Equal weights and biases:  True True
+absolute values of weights are close enough
+Neuron:  3
+Equal weights and biases:  True True
+absolute values of weights are close enough
+Neuron:  4
+Equal weights and biases:  False True
+absolute values of weights are close enough
+Neuron:  5
+Equal weights and biases:  False False
+absolute values of weights are close enough
+Neuron:  6
+Equal weights and biases:  True True
+absolute values of weights are close enough
+Neuron:  7
+Equal weights and biases:  True True
+absolute values of weights are close enough
+Neuron:  8
+Equal weights and biases:  True True
+absolute values of weights are close enough
+Neuron:  9
+Equal weights and biases:  False False
+absolute values of weights are close enough
+Different indices:  [0, 4, 5, 9]

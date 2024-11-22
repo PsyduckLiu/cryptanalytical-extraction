@@ -1,0 +1,42 @@
+
+Check the solution of the last weight matrix.
+Neuron 0 maps on to neuron 4 with error 7.609136201704297e-07 ratio -0.14637818825392115
+Bias check [-3.72189638e-05]
+Neuron 1 maps on to neuron 9 with error 5.706860038163627e-07 ratio -0.12103521677450513
+Bias check [-1.12126001e-06]
+Neuron 2 maps on to neuron 3 with error 8.188645115596859e-07 ratio 0.14516668017430392
+Bias check [1.89956771e-05]
+Neuron 3 maps on to neuron 5 with error 1.250051641140453e-06 ratio 0.1369367161593309
+Bias check [-2.07938212e-05]
+Neuron 4 maps on to neuron 7 with error 1.8958483656674358e-06 ratio -0.13216085595206734
+Bias check [-0.00027264]
+Neuron 5 maps on to neuron 2 with error 8.78192628104862e-07 ratio -0.09205272614648594
+Bias check [-0.00026056]
+Neuron 6 maps on to neuron 8 with error 2.1086381067046873e-06 ratio -0.2093459242895202
+Bias check [-8.23611152e-05]
+Neuron 7 maps on to neuron 6 with error 3.4674436808614144e-06 ratio -0.17468830832687454
+Bias check [0.00048367]
+Neuron 8 maps on to neuron 0 with error 2.678498104773763e-06 ratio -0.1802517542789499
+Bias check [-0.00042493]
+Neuron 9 maps on to neuron 1 with error 1.1748012778900807e-06 ratio 0.10840150667387151
+Bias check [0.00015035]
+Original Neuron 0 maps on to recovered neuron 8
+absolute values of weights are close enough
+Original Neuron 1 maps on to recovered neuron 9
+absolute values of weights are close enough
+Original Neuron 2 maps on to recovered neuron 5
+absolute values of weights are close enough
+Original Neuron 3 maps on to recovered neuron 2
+absolute values of weights are close enough
+Original Neuron 4 maps on to recovered neuron 0
+absolute values of weights are close enough
+Original Neuron 5 maps on to recovered neuron 3
+absolute values of weights are close enough
+Original Neuron 6 maps on to recovered neuron 7
+ERROR LAYER EXTRACTED INCORRECTLY
+Original Neuron 7 maps on to recovered neuron 4
+absolute values of weights are close enough
+Original Neuron 8 maps on to recovered neuron 6
+absolute values of weights are close enough
+Original Neuron 9 maps on to recovered neuron 1
+ERROR LAYER EXTRACTED INCORRECTLY

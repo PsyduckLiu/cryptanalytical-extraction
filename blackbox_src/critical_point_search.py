@@ -1,5 +1,6 @@
 import numpy as np
 import random
+import time
 from .global_vars import GlobalConfig
 from .utils import getAllWeightsAndBiases, predict_manual_fast
 # ==========
@@ -78,9 +79,9 @@ def getMNISTtestImage(batch_size=1, special_setting=False):
         return batch_images.numpy()
 
 def sweep_for_critical_points(model, dimInput, std=1,data=None,setting='original'):
-    print("Sweep for critical points")
     while True:
         print("Start another sweep")
+        startTime = time.time()
         if data!='mnist':
             sweep = do_better_sweep(model,offset=np.random.normal(0, np.random.uniform(std/10,std), size=dimInput), low=-std*1e3, high=std*1e3)
         elif data=='mnist' and setting=='WithDataPoints0.5': # In case we want to test if performance is better if we have a few data points from mnist dataset
@@ -91,6 +92,7 @@ def sweep_for_critical_points(model, dimInput, std=1,data=None,setting='original
         else: #data=='mnist'
             sweep = do_better_sweep(model, low=-std*1e3, high=std*1e3,dataset=data)
         print("Total intersections found", len(sweep))
+        
         for point in sweep:
             yield point
 
